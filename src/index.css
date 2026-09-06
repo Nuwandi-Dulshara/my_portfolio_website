@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-josefin: "Josefin Sans", system-ui, sans-serif;
+  --font-roboto: "Roboto", system-ui, sans-serif;
+  --font-opensans: "Open Sans", system-ui, sans-serif;
+  --font-rubik: "Rubik", system-ui, sans-serif;
+  --font-dmsans: "DM Sans", system-ui, sans-serif;
+  --font-poppins: "Poppins", system-ui, sans-serif;
+  --font-lato: "Lato", system-ui, sans-serif;
+  --font-nunito: "Nunito", system-ui, sans-serif;
+  --font-ubuntu: "Ubuntu", system-ui, sans-serif;
+  --font-ranade: "Ranade", "Poppins", system-ui, sans-serif;
+  --font-sourcesans: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+}
+
+/* ── Custom Design Tokens ───────────────────────────── */
+:root {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Josefin Sans", system-ui, sans-serif;
+
+  --color-bg-main: #020617;
+  --color-bg-secondary: #06111f;
+  --color-bg-card: rgba(8, 25, 45, 0.65);
+
+  --color-blue-primary: #2563eb;
+  --color-blue-light: #38bdf8;
+  --color-blue-bright: #7dd3fc;
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+
+  --color-border: rgba(56, 189, 248, 0.18);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography Utility Classes ─────────────────────── */
+.font-inter { font-family: "Inter", system-ui, sans-serif; }
+.font-josefin { font-family: "Josefin Sans", system-ui, sans-serif; }
+.font-roboto { font-family: "Roboto", system-ui, sans-serif; }
+.font-opensans { font-family: "Open Sans", system-ui, sans-serif; }
+.font-rubik { font-family: "Rubik", system-ui, sans-serif; }
+.font-dmsans { font-family: "DM Sans", system-ui, sans-serif; }
+.font-poppins { font-family: "Poppins", system-ui, sans-serif; }
+.font-lato { font-family: "Lato", system-ui, sans-serif; }
+.font-nunito { font-family: "Nunito", system-ui, sans-serif; }
+.font-ubuntu { font-family: "Ubuntu", system-ui, sans-serif; }
+.font-ranade { font-family: "Ranade", "Poppins", system-ui, sans-serif; }
+.font-sourcesans { font-family: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif; }
+
+/* ── Base Reset & Global ────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+
+  background:
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(37, 99, 235, 0.17),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 25%,
+      rgba(56, 189, 248, 0.1),
+      transparent 26%
+    ),
+    #020617;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ── Selection ──────────────────────────────────────── */
+::selection {
+  background: #38bdf8;
+  color: #020617;
+}
+
+/* ── Links & Buttons ────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06111f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.55);
+}
+
+/* ── Glass Card ─────────────────────────────────────── */
+.glass-card {
+  background: rgba(8, 25, 45, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Holographic 3D Glass Object ───────────────────── */
+.hologram-card {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 25, 52, 0.68) 0%,
+    rgba(4, 15, 33, 0.78) 100%
+  );
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    0 25px 60px -10px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(56, 189, 248, 0.22),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1.5px 2px 0 rgba(56, 189, 248, 0.3),
+    inset 0 0 30px 0 rgba(56, 189, 248, 0.08);
+}
+
+.hologram-glass-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(56, 189, 248, 0.2) 30%,
+    transparent 60%,
+    rgba(56, 189, 248, 0.5) 100%
+  ) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.holo-beam-glow {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(56, 189, 248, 0.45) 0%,
+    rgba(37, 99, 235, 0.2) 50%,
+    transparent 80%
+  );
+  filter: blur(12px);
+}
+
+/* ── Section Container ──────────────────────────────── */
+.section-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-inline: 2rem;
+  }
+}
+
+/* ── Glow Effects ───────────────────────────────────── */
+.glow-blue {
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+}
+
+.glow-holo-cyan {
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4), 0 0 50px rgba(37, 99, 235, 0.25);
+}
+
+/* ── Animated Gradient Text ─────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #7dd3fc, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Floating animation ─────────────────────────────── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Pulse glow animation ───────────────────────────── */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ── Tech badge hover ───────────────────────────────── */
+.tech-badge {
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.tech-badge:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  background-color: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+}
+
+/* ── Timeline dot ───────────────────────────────────── */
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
+  flex-shrink: 0;
+}
