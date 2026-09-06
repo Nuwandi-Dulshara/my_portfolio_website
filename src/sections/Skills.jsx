@@ -5,8 +5,10 @@ import {
   Server,
   Database,
   Brain,
+  Cpu,
   BarChart3,
-  Smartphone,
+  GitBranch,
+  Cloud,
   Wrench,
 } from "lucide-react";
 import SectionTitle from "../components/ui/SectionTitle";
@@ -20,8 +22,10 @@ const iconMap = {
   Server,
   Database,
   Brain,
+  Cpu,
   BarChart3,
-  Smartphone,
+  GitBranch,
+  Cloud,
   Wrench,
 };
 
@@ -66,16 +70,40 @@ export default function Skills() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.07, duration: 0.45 }}
               >
-                <GlassCard className="h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-xl bg-sky-400/10 border border-sky-400/18 flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-sky-400" />
+                <GlassCard className="h-full flex flex-col justify-between p-6">
+                  <div>
+                    {/* Category Top Header with Number, Badge, and Icon */}
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(56,189,248,0.15)]">
+                          <Icon className="w-4 h-4 text-sky-400" />
+                        </div>
+                        <div>
+                          <span className="font-mono text-[10px] font-bold text-sky-400/80 tracking-wider">
+                            {group.number} // CATEGORY
+                          </span>
+                          <h3 className="font-josefin text-base sm:text-lg font-bold text-white tracking-wide">
+                            {group.label}
+                          </h3>
+                        </div>
+                      </div>
+                      {group.badge && (
+                        <span className="font-mono text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 shrink-0">
+                          {group.badge}
+                        </span>
+                      )}
                     </div>
-                    <h3 className="font-dmsans text-sm sm:text-base font-semibold text-white">
-                      {group.label}
-                    </h3>
+
+                    {/* Description */}
+                    {group.description && (
+                      <p className="font-inter text-xs text-slate-400 mb-4 leading-relaxed">
+                        {group.description}
+                      </p>
+                    )}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+
+                  {/* Skills Chips */}
+                  <div className="flex flex-wrap gap-2 pt-3 border-t border-sky-400/10">
                     {group.skills.map((tech) => (
                       <TechBadge
                         key={tech}
