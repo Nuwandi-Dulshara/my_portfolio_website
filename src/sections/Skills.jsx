@@ -71,7 +71,7 @@ export default function Skills() {
                     <div className="w-8 h-8 rounded-xl bg-sky-400/10 border border-sky-400/18 flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4 text-sky-400" />
                     </div>
-                    <h3 className="text-sm font-semibold text-white">
+                    <h3 className="font-dmsans text-sm sm:text-base font-semibold text-white">
                       {group.label}
                     </h3>
                   </div>

@@ -27,7 +27,7 @@ const SectionBlock = ({ icon: Icon, label, children }) => (
       <div className="w-8 h-8 rounded-xl bg-sky-400/10 border border-sky-400/18 flex items-center justify-center shrink-0">
         <Icon className="w-4 h-4 text-sky-400" />
       </div>
-      <h2 className="text-sm font-semibold text-sky-300 uppercase tracking-wider">
+      <h2 className="font-dmsans text-sm font-semibold text-sky-300 uppercase tracking-wider">
         {label}
       </h2>
     </div>
@@ -112,10 +112,10 @@ export default function ProjectDetails() {
                 </span>
               ))}
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
+            <h1 className="font-josefin text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 tracking-wide leading-tight">
               {title}
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
+            <p className="font-inter text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
               {shortDescription}
             </p>
 
@@ -124,7 +124,7 @@ export default function ProjectDetails() {
               {video && (
                 <button
                   onClick={() => setVideoOpen(true)}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border border-sky-400/50 bg-sky-400/15 text-sky-200 hover:bg-sky-400/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] transition-all duration-200"
+                  className="font-poppins flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-sky-400/50 bg-sky-400/15 text-sky-200 hover:bg-sky-400/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] transition-all duration-200"
                 >
                   <Play className="w-4 h-4 fill-sky-300" />
                   Watch Demo

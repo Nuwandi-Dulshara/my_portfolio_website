@@ -133,10 +133,10 @@ export default function Hero() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="w-full max-w-[360px] xs:max-w-[390px] sm:max-w-[430px] md:max-w-[460px]"
+            className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px]"
           >
             {/* Hologram Glass Card Container */}
-            <div className="hologram-card relative rounded-3xl p-6 sm:p-7 md:p-8 backdrop-blur-2xl text-white select-none">
+            <div className="hologram-card relative rounded-3xl p-5 sm:p-7 md:p-8 backdrop-blur-2xl text-white select-none">
               {/* Refractive Edge Bevel */}
               <div className="hologram-glass-edge" />
 
@@ -149,24 +149,7 @@ export default function Hero() {
                 }}
               />
 
-              {/* Top Bar: Holographic ID & Status */}
-              <div className="flex items-center justify-between pb-4 mb-5 border-b border-sky-400/20">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
-                  </span>
-                  <p className="font-inter text-[11px] tracking-[0.25em] text-sky-300 uppercase font-semibold">
-                    SYS.PORTFOLIO // HOLO-V1
-                  </p>
-                </div>
 
-                {/* Available for hire pill */}
-                <span className="font-inter inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[10px] font-medium tracking-wide">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Open to Work
-                </span>
-              </div>
 
               {/* Profile Photo & Identity Section */}
               <div className="flex items-center gap-4 sm:gap-5 mb-5">

@@ -3,16 +3,22 @@
 @theme {
   --font-inter: "Inter", system-ui, sans-serif;
   --font-josefin: "Josefin Sans", system-ui, sans-serif;
-  --font-poppins: "Poppins", system-ui, sans-serif;
-  --font-dmsans: "DM Sans", system-ui, sans-serif;
   --font-roboto: "Roboto", system-ui, sans-serif;
+  --font-opensans: "Open Sans", system-ui, sans-serif;
   --font-rubik: "Rubik", system-ui, sans-serif;
+  --font-dmsans: "DM Sans", system-ui, sans-serif;
+  --font-poppins: "Poppins", system-ui, sans-serif;
+  --font-lato: "Lato", system-ui, sans-serif;
+  --font-nunito: "Nunito", system-ui, sans-serif;
+  --font-ubuntu: "Ubuntu", system-ui, sans-serif;
+  --font-ranade: "Ranade", "Poppins", system-ui, sans-serif;
+  --font-sourcesans: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
 }
 
 /* ── Custom Design Tokens ───────────────────────────── */
 :root {
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-heading: "Josefin Sans", system-ui, sans-serif;
 
   --color-bg-main: #020617;
   --color-bg-secondary: #06111f;
@@ -33,24 +39,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.font-inter {
-  font-family: "Inter", system-ui, sans-serif;
-}
-.font-josefin {
-  font-family: "Josefin Sans", system-ui, sans-serif;
-}
-.font-poppins {
-  font-family: "Poppins", system-ui, sans-serif;
-}
-.font-dmsans {
-  font-family: "DM Sans", system-ui, sans-serif;
-}
-.font-roboto {
-  font-family: "Roboto", system-ui, sans-serif;
-}
-.font-rubik {
-  font-family: "Rubik", system-ui, sans-serif;
-}
+/* ── Typography Utility Classes ─────────────────────── */
+.font-inter { font-family: "Inter", system-ui, sans-serif; }
+.font-josefin { font-family: "Josefin Sans", system-ui, sans-serif; }
+.font-roboto { font-family: "Roboto", system-ui, sans-serif; }
+.font-opensans { font-family: "Open Sans", system-ui, sans-serif; }
+.font-rubik { font-family: "Rubik", system-ui, sans-serif; }
+.font-dmsans { font-family: "DM Sans", system-ui, sans-serif; }
+.font-poppins { font-family: "Poppins", system-ui, sans-serif; }
+.font-lato { font-family: "Lato", system-ui, sans-serif; }
+.font-nunito { font-family: "Nunito", system-ui, sans-serif; }
+.font-ubuntu { font-family: "Ubuntu", system-ui, sans-serif; }
+.font-ranade { font-family: "Ranade", "Poppins", system-ui, sans-serif; }
+.font-sourcesans { font-family: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif; }
 
 /* ── Base Reset & Global ────────────────────────────── */
 *,
@@ -61,12 +62,16 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   color: var(--color-text-primary);
 
@@ -201,7 +206,19 @@ textarea {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-inline: 2rem;
+  }
 }
 
 /* ── Glow Effects ───────────────────────────────────── */

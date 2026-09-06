@@ -49,10 +49,10 @@ export default function AIJourney() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <p className="text-sky-400 tracking-[0.25em] uppercase text-xs font-semibold mb-3">
+          <p className="font-inter text-sky-400 tracking-[0.25em] uppercase text-xs font-semibold mb-3">
             The Next Layer
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-2xl">
+          <h2 className="font-josefin text-3xl sm:text-4xl lg:text-5xl font-bold text-white max-w-2xl leading-tight">
             From Software Engineering
             <br />
             <span className="gradient-text">to Intelligent Systems.</span>
@@ -69,7 +69,7 @@ export default function AIJourney() {
             <GlassCard>
               <div className="flex items-center gap-2 mb-5">
                 <Sparkles className="w-4 h-4 text-sky-400" />
-                <p className="text-xs tracking-widest uppercase text-sky-400 font-semibold">
+                <p className="font-inter text-xs tracking-widest uppercase text-sky-400 font-semibold">
                   Current Focus
                 </p>
               </div>
@@ -82,10 +82,10 @@ export default function AIJourney() {
                     transition={{ delay: 0.15 + i * 0.05 }}
                     className="p-3 rounded-xl border border-sky-400/12 bg-sky-400/4 hover:border-sky-400/30 hover:bg-sky-400/8 transition-all duration-200"
                   >
-                    <p className="text-sm font-medium text-slate-200">
+                    <p className="font-dmsans text-sm font-semibold text-slate-200">
                       {area.label}
                     </p>
-                    <p className="text-xs text-slate-500 mt-0.5">{area.desc}</p>
+                    <p className="font-inter text-xs text-slate-400 mt-0.5">{area.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -100,7 +100,7 @@ export default function AIJourney() {
             className="flex flex-col gap-5"
           >
             <GlassCard>
-              <p className="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-5">
+              <p className="font-inter text-xs tracking-widest uppercase text-sky-400 font-semibold mb-5">
                 Engineering Journey
               </p>
               <div className="space-y-0">
@@ -115,10 +115,10 @@ export default function AIJourney() {
                     </div>
                     {/* Content */}
                     <div className="pb-6 last:pb-0">
-                      <p className="text-sm font-semibold text-sky-300 mb-1">
+                      <p className="font-dmsans text-sm font-semibold text-sky-300 mb-1">
                         {step.phase}
                       </p>
-                      <p className="text-sm text-slate-400 leading-relaxed">
+                      <p className="font-inter text-sm text-slate-400 leading-relaxed">
                         {step.desc}
                       </p>
                     </div>

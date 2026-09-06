@@ -97,10 +97,10 @@ export default function ProjectCard({ project }) {
           </div>
 
           {/* Title & description */}
-          <h3 className="text-base font-semibold text-white mb-2 leading-snug">
+          <h3 className="font-dmsans text-base sm:text-lg font-bold text-white mb-2 leading-snug">
             {title}
           </h3>
-          <p className="text-sm text-slate-400 leading-relaxed flex-1 mb-4">
+          <p className="font-inter text-xs sm:text-sm text-slate-400 leading-relaxed flex-1 mb-4">
             {shortDescription}
           </p>
 
@@ -110,7 +110,7 @@ export default function ProjectCard({ project }) {
               <TechBadge key={tech} tech={tech} size="xs" />
             ))}
             {technologies?.length > 5 && (
-              <span className="px-2 py-0.5 text-xs text-slate-600">
+              <span className="font-inter px-2 py-0.5 text-xs text-slate-600">
                 +{technologies.length - 5} more
               </span>
             )}
@@ -122,7 +122,7 @@ export default function ProjectCard({ project }) {
             {video && (
               <button
                 onClick={() => setVideoOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium border border-sky-400/35 bg-sky-400/10 text-sky-300 hover:bg-sky-400/20 hover:border-sky-400/60 transition-all duration-200"
+                className="font-poppins flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium border border-sky-400/35 bg-sky-400/10 text-sky-300 hover:bg-sky-400/20 hover:border-sky-400/60 transition-all duration-200"
               >
                 <Play className="w-3.5 h-3.5 fill-sky-300" />
                 Watch Demo
@@ -132,7 +132,7 @@ export default function ProjectCard({ project }) {
             {/* Case Study */}
             <Link
               to={`/projects/${id}`}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium border border-slate-700/60 text-slate-400 hover:border-sky-400/30 hover:text-sky-300 transition-all duration-200"
+              className="font-poppins flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium border border-slate-700/60 text-slate-400 hover:border-sky-400/30 hover:text-sky-300 transition-all duration-200"
             >
               <FileText className="w-3.5 h-3.5" />
               Case Study
