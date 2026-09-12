@@ -1,10 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
 export default function VideoModal({ project, onClose }) {
   const modalRef = useRef(null);
   const closeRef = useRef(null);
   const videoRef = useRef(null);
+  const [videoError, setVideoError] = useState(false);
   const demoVideo = project?.demoVideo || project?.video;
 
   useEffect(() => {
@@ -31,17 +33,16 @@ export default function VideoModal({ project, onClose }) {
 
     document.addEventListener("keydown", handleKey);
     closeRef.current?.focus();
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
 
       if (videoElement) {
         videoElement.pause();
-        videoElement.currentTime = 0;
-        videoElement.removeAttribute("src");
-        videoElement.load();
+        // React replays effects in StrictMode. Keep the JSX-owned source intact.
       }
     };
   }, [onClose]);
@@ -63,7 +64,8 @@ export default function VideoModal({ project, onClose }) {
     onClose();
   };
 
-  return (
+  // Keep the viewport overlay outside transformed cards and the scrolling carousel.
+  return createPortal(
     <div
       ref={modalRef}
       onClick={handleBackdropClick}
@@ -103,6 +105,7 @@ export default function VideoModal({ project, onClose }) {
               muted={false}
               onEnded={stopVideo}
               src={demoVideo}
+              onError={() => setVideoError(true)}
             >
               Your browser does not support the video tag.
             </video>
@@ -114,11 +117,22 @@ export default function VideoModal({ project, onClose }) {
         </div>
 
         <div className="px-4 py-3 sm:px-5 border-t border-sky-400/8">
+          {videoError && (
+            <p role="alert" className="mb-2 text-sm text-amber-300">
+              This video could not be played. Try opening the video directly below.
+            </p>
+          )}
+          {demoVideo && (
+            <a href={demoVideo} target="_blank" rel="noopener noreferrer" className="mb-2 inline-block text-sm text-sky-300 underline">
+              Open video directly
+            </a>
+          )}
           <p className="text-[11px] text-slate-500">
             Press <kbd className="px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10">Esc</kbd> or click outside to close
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
