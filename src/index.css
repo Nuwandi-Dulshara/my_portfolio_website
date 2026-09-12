@@ -295,10 +295,13 @@ textarea {
 }
 
 .project-slider {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 189, 248, 0.35) transparent;
+  scrollbar-width: none;
   overscroll-behavior-inline: contain;
   touch-action: pan-x pan-y;
+}
+
+.project-slider::-webkit-scrollbar {
+  display: none;
 }
 
 .project-card-perspective {
