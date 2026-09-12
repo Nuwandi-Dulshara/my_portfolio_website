@@ -1,97 +1,34 @@
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
-import SearchBar from "../ui/SearchBar";
-import { filterProjects } from "../../utils/helpers";
-import { PROJECT_FILTERS } from "../../data/projects";
 
 export default function ProjectGrid({ projects }) {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
+  const sliderRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
-  const filtered = useMemo(
-    () => filterProjects(projects, activeCategory, searchQuery),
-    [projects, activeCategory, searchQuery]
-  );
+  const move = (direction) => {
+    const slider = sliderRef.current;
+    const card = slider?.querySelector("[data-project-card]");
+    if (!slider) return;
+    slider.scrollBy({ left: direction * ((card?.getBoundingClientRect().width || 320) + 20), behavior: reduceMotion ? "auto" : "smooth" });
+  };
 
   return (
-    <div>
-      {/* Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-        {/* Category pills — horizontally scrollable on mobile */}
-        <div
-          className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none w-full sm:w-auto flex-nowrap"
-          role="group"
-          aria-label="Filter projects by category"
-        >
-          {PROJECT_FILTERS.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              aria-pressed={activeCategory === cat}
-              className={[
-                "shrink-0 px-4 py-2 rounded-full text-xs font-medium border transition-all duration-200 whitespace-nowrap",
-                activeCategory === cat
-                  ? "border-sky-400/60 bg-sky-400/15 text-sky-300"
-                  : "border-sky-400/15 bg-transparent text-slate-400 hover:border-sky-400/35 hover:text-slate-200",
-              ].join(" ")}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Search bar */}
-        <div className="w-full sm:w-auto sm:ml-auto">
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+    <div className="relative">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <p className="max-w-xl text-sm leading-relaxed text-slate-400">Choose a card to reveal the project, then tap the image again for its demo and case study.</p>
+        <div className="hidden items-center gap-2 sm:flex">
+          <button type="button" onClick={() => move(-1)} aria-label="Previous project" className="rounded-full border border-sky-400/20 bg-sky-400/5 p-2.5 text-sky-200 transition hover:border-sky-300/50 hover:bg-sky-400/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"><ChevronLeft className="h-5 w-5" /></button>
+          <button type="button" onClick={() => move(1)} aria-label="Next project" className="rounded-full border border-sky-400/20 bg-sky-400/5 p-2.5 text-sky-200 transition hover:border-sky-300/50 hover:bg-sky-400/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"><ChevronRight className="h-5 w-5" /></button>
         </div>
       </div>
-
-      {/* Results count */}
-      {(searchQuery || activeCategory !== "All") && (
-        <p className="text-xs text-slate-600 mb-5">
-          {filtered.length} project{filtered.length !== 1 ? "s" : ""} found
-        </p>
-      )}
-
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <AnimatePresence mode="popLayout">
-          {filtered.length > 0 ? (
-            filtered.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, y: 20, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.97 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-              >
-                <ProjectCard project={project} />
-              </motion.div>
-            ))
-          ) : (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="col-span-full text-center py-16"
-            >
-              <p className="text-slate-500 text-sm">
-                No projects found for &quot;{searchQuery || activeCategory}&quot;.
-              </p>
-              <button
-                onClick={() => {
-                  setActiveCategory("All");
-                  setSearchQuery("");
-                }}
-                className="mt-3 text-xs text-sky-400 hover:text-sky-300 transition-colors"
-              >
-                Clear filters
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div ref={sliderRef} className="project-slider flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-8 pt-2" aria-label="Project carousel">
+        {projects.map((project, index) => (
+          <motion.div key={project.id} data-project-card className="w-[84vw] max-w-[370px] shrink-0 snap-center sm:w-[46vw] lg:w-[31%]" initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : index * 0.08 }}>
+            <ProjectCard project={project} />
+          </motion.div>
+        ))}
       </div>
     </div>
   );

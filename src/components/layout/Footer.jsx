@@ -2,6 +2,7 @@ import { GitFork, Link, Mail, ArrowUp } from "lucide-react";
 
 const footerLinks = [
   { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
   { label: "Skills", href: "/#skills" },
   { label: "Experience", href: "/#experience" },
   { label: "Contact", href: "/#contact" },

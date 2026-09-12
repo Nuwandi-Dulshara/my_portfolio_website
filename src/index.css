@@ -293,3 +293,35 @@ textarea {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
   flex-shrink: 0;
 }
+
+.project-slider {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.35) transparent;
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x pan-y;
+}
+
+.project-card-perspective {
+  perspective: 1400px;
+}
+
+.project-card-inner {
+  transform-style: preserve-3d;
+}
+
+.project-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.project-card-front {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-inner,
+  .project-card-face,
+  .project-card-face img {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -63,8 +63,10 @@ export default function ProjectDetails() {
   const {
     title,
     shortDescription,
+    image,
     categories,
     technologies,
+    demoVideo,
     video,
     github,
     liveDemo,
@@ -121,7 +123,7 @@ export default function ProjectDetails() {
 
             {/* Action row */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              {video && (
+              {(demoVideo || video) && (
                 <button
                   onClick={() => setVideoOpen(true)}
                   className="font-poppins flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium border border-sky-400/50 bg-sky-400/15 text-sky-200 hover:bg-sky-400/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] transition-all duration-200"
@@ -171,6 +173,12 @@ export default function ProjectDetails() {
             </div>
           </div>
 
+          {image && (
+            <div className="mb-8 overflow-hidden rounded-3xl border border-sky-400/15 bg-slate-950/60 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
+              <img src={image} alt={`${title} application screenshot`} className="aspect-video w-full object-cover" />
+            </div>
+          )}
+
           {/* Private repo notice */}
           {privateRepository && (
             <GlassCard className="mb-6 border-amber-400/15 bg-amber-400/4">
@@ -219,7 +227,7 @@ export default function ProjectDetails() {
               )}
 
               {architecture && (
-                <SectionBlock icon={Layers} label="Architecture">
+                <SectionBlock icon={Layers} label="Development Process & Architecture">
                   <p className="text-sm text-slate-400 leading-relaxed font-mono bg-slate-900/40 rounded-xl p-4 border border-sky-400/10">
                     {architecture}
                   </p>
@@ -235,7 +243,7 @@ export default function ProjectDetails() {
               )}
 
               {results && (
-                <SectionBlock icon={Star} label="Results">
+                <SectionBlock icon={Star} label="Final Outcome">
                   <p className="text-sm text-slate-400 leading-relaxed">
                     {results}
                   </p>

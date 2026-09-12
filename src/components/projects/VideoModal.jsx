@@ -10,7 +10,24 @@ export default function VideoModal({ project, onClose }) {
   useEffect(() => {
     const handleKey = (event) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "Tab") {
+        const focusable = modalRef.current?.querySelectorAll(
+          'button:not([disabled]), video[controls], [href], [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
+
+    const videoElement = videoRef.current;
 
     document.addEventListener("keydown", handleKey);
     closeRef.current?.focus();
@@ -20,11 +37,11 @@ export default function VideoModal({ project, onClose }) {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
 
-      if (videoRef.current) {
-        videoRef.current.pause();
-        videoRef.current.currentTime = 0;
-        videoRef.current.muted = true;
-        videoRef.current.src = "";
+      if (videoElement) {
+        videoElement.pause();
+        videoElement.currentTime = 0;
+        videoElement.removeAttribute("src");
+        videoElement.load();
       }
     };
   }, [onClose]);

@@ -7,6 +7,7 @@ import "./index.css";
 
 // Lazy-loaded pages for performance
 const Home = lazy(() => import("./pages/Home"));
+const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
 
 function PageLoader() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/projects/:id" element={<ProjectDetails />} />
               {/* 404 fallback */}
               <Route
                 path="*"
