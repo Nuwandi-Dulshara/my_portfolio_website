@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
 import {
   Monitor,
   Server,
@@ -14,8 +14,7 @@ import {
 import SectionTitle from "../components/ui/SectionTitle";
 import GlassCard from "../components/ui/GlassCard";
 import TechBadge from "../components/ui/TechBadge";
-import { skillGroups, techProjectMap } from "../data/skills";
-import { projects } from "../data/projects";
+import { skillGroups } from "../data/skills";
 
 const iconMap = {
   Monitor,
@@ -30,19 +29,8 @@ const iconMap = {
 };
 
 export default function Skills() {
-  const [selectedTech, setSelectedTech] = useState(null);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  const relatedProjects = selectedTech
-    ? (techProjectMap[selectedTech] || [])
-        .map((id) => projects.find((p) => p.id === id))
-        .filter(Boolean)
-    : [];
-
-  const handleTechClick = (tech) => {
-    setSelectedTech((prev) => (prev === tech ? null : tech));
-  };
 
   return (
     <section id="skills" className="py-20 md:py-28" aria-label="Skills">
@@ -56,7 +44,7 @@ export default function Skills() {
           <SectionTitle
             label="Expertise"
             title="Engineering Skills"
-            subtitle="Technologies I work with — click any skill to see which projects use it."
+            subtitle="Technologies and tools I work with."
           />
         </motion.div>
 
@@ -108,10 +96,6 @@ export default function Skills() {
                       <TechBadge
                         key={tech}
                         tech={tech}
-                        active={selectedTech === tech}
-                        onClick={
-                          techProjectMap[tech] ? handleTechClick : undefined
-                        }
                         size="sm"
                       />
                     ))}
@@ -122,50 +106,6 @@ export default function Skills() {
           })}
         </div>
 
-        {/* Related projects panel */}
-        <AnimatePresence>
-          {selectedTech && relatedProjects.length > 0 && (
-            <motion.div
-              key={selectedTech}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mt-8 overflow-hidden"
-            >
-              <GlassCard>
-                <p className="text-xs text-sky-400 tracking-widest uppercase font-semibold mb-3">
-                  <span className="text-sky-300">{selectedTech}</span> used in
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {relatedProjects.map((p) => (
-                    <a
-                      key={p.id}
-                      href={`/projects/${p.id}`}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl border border-sky-400/20 bg-sky-400/5 text-sm text-slate-300 hover:border-sky-400/45 hover:text-sky-300 transition-all duration-200"
-                    >
-                      {p.title}
-                    </a>
-                  ))}
-                </div>
-              </GlassCard>
-            </motion.div>
-          )}
-          {selectedTech && relatedProjects.length === 0 && (
-            <motion.div
-              key="no-projects"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mt-6"
-            >
-              <p className="text-sm text-slate-600 text-center">
-                No linked projects for{" "}
-                <span className="text-sky-400">{selectedTech}</span> yet.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );

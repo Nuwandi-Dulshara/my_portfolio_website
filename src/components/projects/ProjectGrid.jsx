@@ -3,16 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import ProjectCard from "./ProjectCard";
 import SearchBar from "../ui/SearchBar";
 import { filterProjects } from "../../utils/helpers";
-
-const CATEGORIES = [
-  "All",
-  "Full Stack",
-  "AI / ML",
-  "Data",
-  "Mobile",
-  "Web",
-  "Research",
-];
+import { PROJECT_FILTERS } from "../../data/projects";
 
 export default function ProjectGrid({ projects }) {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -33,7 +24,7 @@ export default function ProjectGrid({ projects }) {
           role="group"
           aria-label="Filter projects by category"
         >
-          {CATEGORIES.map((cat) => (
+          {PROJECT_FILTERS.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}

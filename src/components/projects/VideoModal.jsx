@@ -1,66 +1,73 @@
 import { useEffect, useRef } from "react";
-import { X, AlertTriangle } from "lucide-react";
+import { X } from "lucide-react";
 
-/**
- * VideoModal — Opens project demo video in a modal overlay.
- * Supports both:
- *  - Google Drive preview embeds (videoType: "gdrive")
- *  - Local/direct MP4 files (videoType: "mp4" or null)
- *
- * Video only loads when the modal is opened (lazy loading).
- */
 export default function VideoModal({ project, onClose }) {
   const modalRef = useRef(null);
   const closeRef = useRef(null);
+  const videoRef = useRef(null);
+  const demoVideo = project?.demoVideo || project?.video;
 
-  // Close on Escape key
   useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === "Escape") onClose();
+    const handleKey = (event) => {
+      if (event.key === "Escape") onClose();
     };
+
     document.addEventListener("keydown", handleKey);
-    // Focus the close button for accessibility
     closeRef.current?.focus();
-    // Prevent body scroll
     document.body.style.overflow = "hidden";
+
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
+
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+        videoRef.current.muted = true;
+        videoRef.current.src = "";
+      }
     };
   }, [onClose]);
 
-  // Click outside to close
-  const handleBackdropClick = (e) => {
-    if (e.target === modalRef.current) onClose();
+  const handleBackdropClick = (event) => {
+    if (event.target === modalRef.current) onClose();
   };
 
-  const isGDrive = project?.videoType === "gdrive";
-  const isPlaceholder =
-    project?.video?.startsWith("GOOGLE_DRIVE_LINK") || !project?.video;
+  const stopVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      videoRef.current.muted = true;
+    }
+  };
+
+  const handleClose = () => {
+    stopVideo();
+    onClose();
+  };
 
   return (
     <div
       ref={modalRef}
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-slate-950/85 backdrop-blur-xl"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-8 bg-slate-950/80 backdrop-blur-xl"
       role="dialog"
       aria-modal="true"
       aria-label={`${project?.title} demo video`}
     >
-      <div className="relative w-full max-w-4xl glass-card rounded-3xl overflow-hidden shadow-2xl">
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-sky-400/12">
+      <div className="relative w-full max-w-4xl rounded-3xl overflow-hidden border border-sky-400/15 bg-slate-950/90 shadow-[0_30px_80px_rgba(15,23,42,0.8)]">
+        <div className="flex items-center justify-between px-4 py-3 sm:px-5 border-b border-sky-400/12">
           <div>
-            <p className="text-xs text-sky-400 tracking-widest uppercase font-semibold">
+            <p className="text-[10px] sm:text-xs text-sky-400 tracking-[0.2em] uppercase font-semibold">
               Demo Video
             </p>
-            <h3 className="text-base font-semibold text-white mt-0.5">
+            <h3 className="text-base sm:text-lg font-semibold text-white mt-1">
               {project?.title}
             </h3>
           </div>
           <button
             ref={closeRef}
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close video"
             className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/8 transition-colors"
           >
@@ -68,49 +75,30 @@ export default function VideoModal({ project, onClose }) {
           </button>
         </div>
 
-        {/* Video area */}
         <div className="relative bg-black aspect-video">
-          {isPlaceholder ? (
-            /* Placeholder — show when Google Drive link isn't filled in yet */
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-slate-500 bg-slate-950">
-              <AlertTriangle className="w-10 h-10 text-sky-400/40" />
-              <div className="text-center">
-                <p className="text-sm font-medium text-slate-300">
-                  Video link not configured yet
-                </p>
-                <p className="text-xs text-slate-600 mt-1">
-                  Update the Google Drive link in{" "}
-                  <code className="text-sky-400/70">src/data/projects.js</code>
-                </p>
-              </div>
-            </div>
-          ) : isGDrive ? (
-            /* Google Drive preview embed */
-            <iframe
-              src={project.video}
-              title={`${project.title} demo`}
-              className="absolute inset-0 w-full h-full border-0"
-              allow="autoplay"
-              allowFullScreen
-            />
-          ) : (
-            /* Local / direct MP4 */
+          {demoVideo ? (
             <video
+              ref={videoRef}
               className="absolute inset-0 w-full h-full"
               controls
               autoPlay
               playsInline
-              src={project.video}
+              muted={false}
+              onEnded={stopVideo}
+              src={demoVideo}
             >
               Your browser does not support the video tag.
             </video>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-950 text-slate-400 text-sm">
+              No demo video available for this project.
+            </div>
           )}
         </div>
 
-        {/* Footer hint */}
-        <div className="px-5 py-3 border-t border-sky-400/8">
-          <p className="text-xs text-slate-600">
-            Press <kbd className="px-1.5 py-0.5 rounded bg-white/5 text-slate-500 border border-white/10">Esc</kbd> or click outside to close
+        <div className="px-4 py-3 sm:px-5 border-t border-sky-400/8">
+          <p className="text-[11px] text-slate-500">
+            Press <kbd className="px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10">Esc</kbd> or click outside to close
           </p>
         </div>
       </div>
