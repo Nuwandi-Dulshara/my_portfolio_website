@@ -1,20 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
 export default function VideoModal({ project, onClose }) {
   const modalRef = useRef(null);
   const closeRef = useRef(null);
-  const videoRef = useRef(null);
-  const [videoError, setVideoError] = useState(false);
-  const demoVideo = project?.demoVideo || project?.video;
+  const demoVideoUrl = project?.demoVideoUrl;
 
   useEffect(() => {
     const handleKey = (event) => {
       if (event.key === "Escape") onClose();
       if (event.key === "Tab") {
         const focusable = modalRef.current?.querySelectorAll(
-          'button:not([disabled]), video[controls], [href], [tabindex]:not([tabindex="-1"])'
+          'button:not([disabled]), iframe, [href], [tabindex]:not([tabindex="-1"])'
         );
         if (!focusable?.length) return;
         const first = focusable[0];
@@ -29,8 +27,6 @@ export default function VideoModal({ project, onClose }) {
       }
     };
 
-    const videoElement = videoRef.current;
-
     document.addEventListener("keydown", handleKey);
     closeRef.current?.focus();
     const previousOverflow = document.body.style.overflow;
@@ -40,28 +36,11 @@ export default function VideoModal({ project, onClose }) {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = previousOverflow;
 
-      if (videoElement) {
-        videoElement.pause();
-        // React replays effects in StrictMode. Keep the JSX-owned source intact.
-      }
     };
   }, [onClose]);
 
   const handleBackdropClick = (event) => {
     if (event.target === modalRef.current) onClose();
-  };
-
-  const stopVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-      videoRef.current.muted = true;
-    }
-  };
-
-  const handleClose = () => {
-    stopVideo();
-    onClose();
   };
 
   // Keep the viewport overlay outside transformed cards and the scrolling carousel.
@@ -74,7 +53,7 @@ export default function VideoModal({ project, onClose }) {
       aria-modal="true"
       aria-label={`${project?.title} demo video`}
     >
-      <div className="relative w-full max-w-4xl rounded-3xl overflow-hidden border border-sky-400/15 bg-slate-950/90 shadow-[0_30px_80px_rgba(15,23,42,0.8)]">
+      <div style={{ maxWidth: "min(56rem, calc((100dvh - 12rem) * 16 / 9))" }} className="relative w-full max-w-4xl rounded-3xl overflow-hidden border border-sky-400/15 bg-slate-950/90 shadow-[0_30px_80px_rgba(15,23,42,0.8)]">
         <div className="flex items-center justify-between px-4 py-3 sm:px-5 border-b border-sky-400/12">
           <div>
             <p className="text-[10px] sm:text-xs text-sky-400 tracking-[0.2em] uppercase font-semibold">
@@ -86,7 +65,7 @@ export default function VideoModal({ project, onClose }) {
           </div>
           <button
             ref={closeRef}
-            onClick={handleClose}
+            onClick={onClose}
             aria-label="Close video"
             className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/8 transition-colors"
           >
@@ -95,20 +74,14 @@ export default function VideoModal({ project, onClose }) {
         </div>
 
         <div className="relative bg-black aspect-video">
-          {demoVideo ? (
-            <video
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full"
-              controls
-              autoPlay
-              playsInline
-              muted={false}
-              onEnded={stopVideo}
-              src={demoVideo}
-              onError={() => setVideoError(true)}
-            >
-              Your browser does not support the video tag.
-            </video>
+          {demoVideoUrl ? (
+            <iframe
+              src={demoVideoUrl}
+              className="absolute inset-0 h-full w-full rounded-xl border-0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title={`${project?.title} Demo`}
+            />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-950 text-slate-400 text-sm">
               No demo video available for this project.
@@ -117,13 +90,8 @@ export default function VideoModal({ project, onClose }) {
         </div>
 
         <div className="px-4 py-3 sm:px-5 border-t border-sky-400/8">
-          {videoError && (
-            <p role="alert" className="mb-2 text-sm text-amber-300">
-              This video could not be played. Try opening the video directly below.
-            </p>
-          )}
-          {demoVideo && (
-            <a href={demoVideo} target="_blank" rel="noopener noreferrer" className="mb-2 inline-block text-sm text-sky-300 underline">
+          {demoVideoUrl && (
+            <a href={demoVideoUrl} target="_blank" rel="noopener noreferrer" className="mb-2 inline-block text-sm text-sky-300 underline">
               Open video directly
             </a>
           )}

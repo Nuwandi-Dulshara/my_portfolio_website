@@ -56,7 +56,7 @@ export default function Experience() {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-3"
           >
-            <span className="font-inter text-xs tracking-[0.3em] uppercase font-semibold text-sky-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
+            <span className="font-ui text-xs tracking-[0.3em] uppercase font-semibold text-sky-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
               CAREER &amp; JOURNEY
             </span>
             <span className="h-px w-10 bg-sky-400/30" />
@@ -66,7 +66,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-josefin text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-wide leading-tight"
+            className="type-section-title font-bold text-white tracking-wide leading-tight"
           >
             Work <span className="gradient-text">Experience</span>
           </motion.h2>
@@ -75,7 +75,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="font-inter text-slate-400 text-base sm:text-lg mt-4 leading-relaxed"
+            className="font-body text-slate-400 text-base sm:text-lg mt-4 leading-relaxed"
           >
             Engineering scalable full-stack applications, integrating intelligent AI features, and delivering production-ready software solutions.
           </motion.p>
@@ -114,32 +114,32 @@ export default function Experience() {
                       {/* Header: Role, Company, Period, Type Badge */}
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 pb-5 mb-5 border-b border-sky-400/15">
                         <div>
-                          <h3 className="font-dmsans text-lg sm:text-xl font-bold text-white group-hover:text-sky-100 transition-colors">
+                          <h3 className="font-section text-lg sm:text-xl font-bold text-white group-hover:text-sky-100 transition-colors">
                             {exp.role}
                           </h3>
                           <div className="flex items-center gap-2 mt-1 flex-wrap">
-                            <span className="font-dmsans text-sm sm:text-[15px] font-semibold text-sky-300">
+                            <span className="font-section text-sm sm:text-[15px] font-semibold text-sky-300">
                               {exp.company}
                             </span>
                             {exp.formerCompany && (
-                              <span className="font-inter text-xs text-slate-400 italic">
+                              <span className="font-body text-xs text-slate-400 italic">
                                 ({exp.formerCompany})
                               </span>
                             )}
                             <span className="text-slate-600 text-xs">•</span>
-                            <span className="font-inter text-xs text-slate-400">
+                            <span className="font-body text-xs text-slate-400">
                               {exp.mode}
                             </span>
                           </div>
                         </div>
 
                         <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
-                          <span className="font-inter inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-sky-500/10 border border-sky-400/20 text-sky-200">
+                          <span className="font-ui inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-sky-500/10 border border-sky-400/20 text-sky-200">
                             <Calendar className="w-3 h-3 text-sky-400" />
                             {exp.period}
                           </span>
                           <span
-                            className={`font-poppins inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border ${currentType.badge}`}
+                            className={`font-ui inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border ${currentType.badge}`}
                           >
                             <span
                               className={`w-1.5 h-1.5 rounded-full ${currentType.dot}`}
@@ -150,7 +150,7 @@ export default function Experience() {
                       </div>
 
                       {/* Summary Description */}
-                      <p className="font-inter text-sm text-slate-300 leading-relaxed mb-5">
+                      <p className="font-body text-sm text-slate-300 leading-relaxed mb-5">
                         {exp.description}
                       </p>
 
@@ -171,7 +171,7 @@ export default function Experience() {
                       <div className="pt-4 border-t border-sky-400/10">
                         <div className="flex items-center gap-2 mb-2.5">
                           <Sparkles className="w-3.5 h-3.5 text-sky-400/80" />
-                          <span className="font-inter text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+                          <span className="font-ui text-[10px] font-semibold uppercase tracking-widest text-slate-400">
                             Technologies &amp; Tools
                           </span>
                         </div>
@@ -179,7 +179,7 @@ export default function Experience() {
                           {exp.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="font-inter text-xs px-2.5 py-1 rounded-lg bg-slate-900/60 border border-sky-400/15 text-sky-200/90 hover:border-sky-400/40 hover:bg-sky-500/10 hover:text-white transition-all duration-200 shadow-[0_0_6px_rgba(56,189,248,0.06)]"
+                              className="font-ui text-xs px-2.5 py-1 rounded-lg bg-slate-900/60 border border-sky-400/15 text-sky-200/90 hover:border-sky-400/40 hover:bg-sky-500/10 hover:text-white transition-all duration-200 shadow-[0_0_6px_rgba(56,189,248,0.06)]"
                             >
                               {tech}
                             </span>
@@ -207,10 +207,10 @@ export default function Experience() {
                   <GraduationCap className="w-4 h-4 text-sky-400" />
                 </div>
                 <div>
-                  <h3 className="font-josefin text-lg font-bold text-white tracking-wide">
+                  <h3 className="font-section text-lg font-bold text-white tracking-wide">
                     Education
                   </h3>
-                  <span className="font-inter text-[11px] text-slate-400">
+                  <span className="font-body text-[11px] text-slate-400">
                     Academic Qualifications
                   </span>
                 </div>
@@ -218,29 +218,29 @@ export default function Experience() {
 
               {education.map((edu) => (
                 <div key={edu.id}>
-                  <h4 className="font-dmsans text-base font-bold text-white leading-snug">
+                  <h4 className="font-section text-base font-bold text-white leading-snug">
                     {edu.degree}
                   </h4>
-                  <p className="font-dmsans text-sm font-semibold text-sky-300 mt-1">
+                  <p className="font-body text-sm font-semibold text-sky-300 mt-1">
                     {edu.institution}
                   </p>
-                  <p className="font-inter text-xs text-slate-400 mt-1">
+                  <p className="font-body text-xs text-slate-400 mt-1">
                     {edu.period}
                   </p>
 
-                  <p className="font-inter text-xs sm:text-sm text-slate-300/85 mt-3 leading-relaxed">
+                  <p className="font-body text-xs sm:text-sm text-slate-300/85 mt-3 leading-relaxed">
                     {edu.description}
                   </p>
 
                   <div className="mt-5 pt-4 border-t border-sky-400/10">
-                    <p className="font-inter text-[10px] font-semibold text-slate-400 mb-2.5 uppercase tracking-widest">
+                    <p className="font-ui text-[10px] font-semibold text-slate-400 mb-2.5 uppercase tracking-widest">
                       Key Focus Coursework
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {edu.subjects.map((sub) => (
                         <span
                           key={sub}
-                          className="font-inter text-[11px] px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-400/15 text-slate-300"
+                          className="font-ui text-[11px] px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-400/15 text-slate-300"
                         >
                           {sub}
                         </span>
@@ -263,16 +263,16 @@ export default function Experience() {
                   <Layers className="w-4 h-4 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="font-josefin text-lg font-bold text-white tracking-wide">
+                  <h3 className="font-section text-lg font-bold text-white tracking-wide">
                     Core Strengths
                   </h3>
-                  <span className="font-inter text-[11px] text-slate-400">
+                  <span className="font-body text-[11px] text-slate-400">
                     Proven Track Record
                   </span>
                 </div>
               </div>
 
-              <div className="space-y-3 font-inter text-xs sm:text-sm text-slate-300/90">
+              <div className="space-y-3 font-body text-xs sm:text-sm text-slate-300/90">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>

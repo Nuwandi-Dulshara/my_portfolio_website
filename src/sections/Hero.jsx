@@ -169,7 +169,7 @@ export default function Hero() {
                 {/* Name & Title */}
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <h1 className="font-josefin text-2xl sm:text-3xl font-bold text-white tracking-wide leading-tight">
+                    <h1 className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-wide leading-tight">
                       Nuwandi Dulshara
                     </h1>
                     <CheckCircle2
@@ -177,10 +177,10 @@ export default function Hero() {
                       aria-label="Verified Profile"
                     />
                   </div>
-                  <p className="font-dmsans text-sm sm:text-[15px] font-medium text-sky-300 mt-1 tracking-wide">
+                  <p className="font-body text-sm sm:text-[15px] font-medium text-sky-300 mt-1 tracking-wide">
                     Full-Stack Software Engineer
                   </p>
-                  <div className="font-inter flex items-center gap-1.5 text-slate-400 text-xs mt-1">
+                  <div className="font-body flex items-center gap-1.5 text-slate-400 text-xs mt-1">
                     <MapPin className="w-3 h-3 text-sky-400/80 shrink-0" />
                     <span>Sri Lanka • Remote</span>
                   </div>
@@ -190,21 +190,21 @@ export default function Hero() {
               {/* Tagline / Focus Areas */}
               <div className="mb-5 px-3.5 py-2.5 rounded-2xl bg-sky-950/40 border border-sky-400/20 backdrop-blur-md flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-sky-400 shrink-0" />
-                <p className="font-poppins text-xs sm:text-[13px] font-medium text-sky-100 tracking-wide">
+                <p className="font-serif text-sm sm:text-base font-medium text-sky-100 tracking-wide">
                   AI • ML • Data Enthusiast
                 </p>
               </div>
 
               {/* Tech Stack Pills */}
               <div className="mb-6">
-                <p className="font-inter text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2.5">
+                <p className="font-ui text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2.5">
                   Core Technologies
                 </p>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {techPills.map((tech) => (
                     <span
                       key={tech}
-                      className="font-inter px-2.5 py-1 text-xs font-medium rounded-lg bg-sky-500/10 border border-sky-400/25 text-sky-200 hover:border-sky-300 hover:bg-sky-400/20 hover:text-white transition-all duration-200 shadow-[0_0_8px_rgba(56,189,248,0.1)]"
+                      className="font-ui px-2.5 py-1 text-xs font-medium rounded-lg bg-sky-500/10 border border-sky-400/25 text-sky-200 hover:border-sky-300 hover:bg-sky-400/20 hover:text-white transition-all duration-200 shadow-[0_0_8px_rgba(56,189,248,0.1)]"
                     >
                       {tech}
                     </span>
@@ -218,7 +218,7 @@ export default function Hero() {
                 <a
                   href="/resume/nuwandi-dulshara-resume.pdf"
                   download
-                  className="font-poppins flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-gradient-to-r from-sky-500/30 via-blue-600/30 to-sky-500/30 hover:from-sky-500/45 hover:via-blue-600/45 hover:to-sky-500/45 border border-sky-400/50 text-white shadow-[0_0_20px_rgba(56,189,248,0.25)] hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] transition-all duration-300 group tracking-wide"
+                  className="font-ui flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-gradient-to-r from-sky-500/30 via-blue-600/30 to-sky-500/30 hover:from-sky-500/45 hover:via-blue-600/45 hover:to-sky-500/45 border border-sky-400/50 text-white shadow-[0_0_20px_rgba(56,189,248,0.25)] hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] transition-all duration-300 group tracking-wide"
                 >
                   <Download className="w-4 h-4 text-sky-300 group-hover:scale-110 transition-transform" />
                   <span>Download CV</span>
@@ -263,7 +263,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <span className="font-inter text-[10px] tracking-[0.3em] uppercase text-sky-400/70 font-semibold">
+          <span className="font-ui text-[10px] tracking-[0.3em] uppercase text-sky-400/70 font-semibold">
             EXPLORE
           </span>
           <motion.div

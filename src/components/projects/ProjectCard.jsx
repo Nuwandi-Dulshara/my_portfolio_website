@@ -59,7 +59,7 @@ export default function ProjectCard({ project }) {
                 <span className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sky-950 via-slate-900 to-blue-950 text-xs uppercase tracking-[0.22em] text-sky-200/60">Image coming soon</span>
               )}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent px-5 pb-6 pt-24 text-left">
-                <h3 className="font-dmsans text-xl font-bold text-white">{project.title}</h3>
+                <h3 className="font-heading text-xl font-bold text-white">{project.title}</h3>
                 <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-300">{project.shortDescription}</p>
               </div>
             </button>
@@ -67,7 +67,7 @@ export default function ProjectCard({ project }) {
               {actionsVisible && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/72 p-6 backdrop-blur-md" onClick={() => setActionsVisible(false)}>
                   <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduceMotion ? 0 : 12 }} className="grid w-full max-w-[230px] gap-3" onClick={(event) => event.stopPropagation()}>
-                    <button ref={demoButtonRef} type="button" disabled={!project.demoVideo && !project.video} onClick={() => setVideoOpen(true)} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-sky-300/50 bg-sky-400/20 px-4 text-sm font-semibold text-white transition hover:bg-sky-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-45"><Play className="h-4 w-4 fill-current" /> Watch Demo</button>
+                    <button ref={demoButtonRef} type="button" disabled={!project.demoVideoUrl} onClick={() => setVideoOpen(true)} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-sky-300/50 bg-sky-400/20 px-4 text-sm font-semibold text-white transition hover:bg-sky-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-45"><Play className="h-4 w-4 fill-current" /> Watch Demo</button>
                     <Link to={project.caseStudy || `/projects/${project.id}`} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-sky-300/25 bg-slate-900/75 px-4 text-sm font-semibold text-sky-100 transition hover:border-sky-300/50 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"><FileText className="h-4 w-4" /> Case Study</Link>
                   </motion.div>
                 </motion.div>

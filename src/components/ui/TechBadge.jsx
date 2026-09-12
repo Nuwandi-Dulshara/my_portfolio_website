@@ -27,7 +27,7 @@ export default function TechBadge({
           : undefined
       }
       className={[
-        "tech-badge inline-block rounded-full border font-mono",
+        "tech-badge inline-block rounded-full border font-ui",
         sizes[size],
         "transition-all duration-200",
         active

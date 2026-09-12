@@ -67,16 +67,16 @@ export default function Skills() {
                           <Icon className="w-4 h-4 text-sky-400" />
                         </div>
                         <div>
-                          <span className="font-mono text-[10px] font-bold text-sky-400/80 tracking-wider">
+                          <span className="font-ui text-[10px] font-bold text-sky-400/80 tracking-wider">
                             {group.number} // CATEGORY
                           </span>
-                          <h3 className="font-josefin text-base sm:text-lg font-bold text-white tracking-wide">
+                          <h3 className="font-section text-base sm:text-lg font-bold text-white tracking-wide">
                             {group.label}
                           </h3>
                         </div>
                       </div>
                       {group.badge && (
-                        <span className="font-mono text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 shrink-0">
+                        <span className="font-ui text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 shrink-0">
                           {group.badge}
                         </span>
                       )}
@@ -84,7 +84,7 @@ export default function Skills() {
 
                     {/* Description */}
                     {group.description && (
-                      <p className="font-inter text-xs text-slate-400 mb-4 leading-relaxed">
+                      <p className="font-body text-xs text-slate-400 mb-4 leading-relaxed">
                         {group.description}
                       </p>
                     )}

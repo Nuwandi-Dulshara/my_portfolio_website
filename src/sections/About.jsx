@@ -7,6 +7,8 @@ import {
   TrendingUp,
   Code2,
   MapPin,
+  Globe2,
+  CircleCheck,
   GraduationCap,
   Briefcase,
   Sparkles,
@@ -68,6 +70,7 @@ const quickFacts = [
     secondary: "Production & client solutions",
   },
   {
+    icon: CircleCheck,
     isStatus: true,
     label: "Availability",
     value: "Open to New Opportunities",
@@ -117,7 +120,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-3"
           >
-            <span className="font-inter text-xs tracking-[0.3em] uppercase font-semibold text-sky-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
+            <span className="font-ui text-xs tracking-[0.3em] uppercase font-semibold text-sky-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
               ABOUT
             </span>
             <span className="h-px w-10 bg-sky-400/30" />
@@ -128,7 +131,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-josefin text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-wide leading-tight"
+            className="type-section-title font-bold text-white tracking-wide leading-tight"
           >
             Who <span className="gradient-text">I Am</span>
           </motion.h2>
@@ -151,7 +154,7 @@ export default function About() {
             />
 
             {/* Paragraph Content */}
-            <div className="space-y-6 font-inter text-slate-300 text-base sm:text-[17px] leading-relaxed">
+            <div className="space-y-6 font-body text-slate-300 text-base sm:text-[17px] leading-relaxed">
               <p>
                 I am a{" "}
                 <span className="font-semibold text-white bg-gradient-to-r from-sky-300 via-sky-200 to-cyan-300 bg-clip-text text-transparent">
@@ -207,7 +210,7 @@ export default function About() {
               {/* Subtle decorative background watermark */}
               <div
                 aria-hidden="true"
-                className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-mono font-black text-sky-400/[0.04] select-none pointer-events-none"
+                className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-ui font-black text-sky-400/[0.04] select-none pointer-events-none"
               >
                 &lt;/&gt;
               </div>
@@ -219,25 +222,25 @@ export default function About() {
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                 </div>
-                <span className="font-inter text-[11px] font-mono tracking-widest uppercase text-sky-400/80">
+                <span className="font-ui text-[11px] font-ui tracking-widest uppercase text-sky-400/80">
                   SYSTEM // ARCHITECTURE
                 </span>
               </div>
 
               {/* Title & Tagline */}
               <div className="mb-6">
-                <p className="font-mono text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                <p className="font-ui text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
                   <Terminal className="w-5 h-5 text-sky-400 shrink-0" />
                   <span>&lt; Full-Stack Engineer /&gt;</span>
                 </p>
-                <p className="font-dmsans text-xs sm:text-sm text-sky-300/80 mt-1.5 leading-snug">
+                <p className="font-section text-xs sm:text-sm text-sky-300/80 mt-1.5 leading-snug">
                   Building Software • Exploring Intelligence • Solving Real
                   Problems
                 </p>
               </div>
 
               {/* Minimalist Neural & Workflow Architecture graphic */}
-              <div className="p-4 rounded-2xl bg-[#030712]/70 border border-sky-400/15 font-mono text-xs space-y-3">
+              <div className="p-4 rounded-2xl bg-[#030712]/70 border border-sky-400/15 font-ui text-xs space-y-3">
                 <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-white/5">
                   <span className="flex items-center gap-1.5 text-sky-300">
                     <Sparkles className="w-3.5 h-3.5" /> Pipeline Active
@@ -287,124 +290,65 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* ── 4. CURRENT FOCUS SUBSECTION ───────────────────────────────────── */}
-        <div className="mb-24 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <div>
-              <h3 className="font-josefin text-2xl sm:text-3xl font-bold text-white tracking-wide">
-                Current Focus
-              </h3>
-              <p className="font-inter text-xs sm:text-sm text-slate-400 mt-1">
-                Active domains of research, engineering, and continuous mastery
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Responsive Grid of Focus Cards (6 items: 3x2 on desktop) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="focus-showcase">
+          <div className="mb-8 sm:mb-10">
+            <div aria-hidden="true" className="focus-heading-accent"><span /></div>
+            <h3 className="font-section text-2xl sm:text-3xl font-bold text-white tracking-wide">Current Focus</h3>
+            <p className="font-body text-xs sm:text-sm text-slate-400 mt-3 max-w-xl">
+              Active domains of research, engineering, and continuous mastery
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4 sm:gap-5 lg:gap-6">
             {currentFocusItems.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.45, delay: index * 0.06 }}
-                  className="group relative rounded-2xl p-5 bg-[#07111F]/70 border border-sky-400/15 backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-sky-400/40 hover:bg-gradient-to-br hover:from-sky-950/40 hover:to-[#07111F] hover:shadow-[0_12px_28px_-6px_rgba(56,189,248,0.22)] cursor-default"
-                >
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:border-sky-400/50 group-hover:bg-sky-400/20 transition-all duration-300">
-                      <Icon className="w-5 h-5 text-sky-400 group-hover:text-cyan-300 transition-colors" />
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="font-dmsans text-sm sm:text-[15px] font-semibold text-slate-200 group-hover:text-white transition-colors">
-                        {item.name}
-                      </h4>
-                      <p className="font-inter text-xs text-slate-400 mt-0.5 leading-snug group-hover:text-slate-300 transition-colors">
-                        {item.desc}
-                      </p>
-                    </div>
+                <article key={item.name} className="focus-surface focus-domain-card"
+                  style={{ "--focus-accent": ["56 189 248", "96 165 250", "34 211 238", "129 140 248", "45 212 191", "125 211 252"][index] }}>
+                  <div className="focus-card-top" aria-hidden="true">
+                    <div className="focus-icon"><Icon size={24} strokeWidth={1.6} /></div>
+                    <div className="focus-circuit"><span /><span /><span /></div>
                   </div>
-                </motion.div>
+                  <h4 className="font-section text-base sm:text-lg font-semibold text-slate-100 mt-6">{item.name}</h4>
+                  <p className="font-body text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">{item.desc}</p>
+                  <span aria-hidden="true" className="focus-card-line" />
+                </article>
               );
             })}
           </div>
-        </div>
-
-        {/* ── 5. QUICK FACTS SUBSECTION ─────────────────────────────────────── */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <div>
-              <h3 className="font-josefin text-2xl sm:text-3xl font-bold text-white tracking-wide">
-                Quick Facts
-              </h3>
-              <p className="font-inter text-xs sm:text-sm text-slate-400 mt-1">
+          <div className="focus-facts mt-12 sm:mt-16 pt-10 sm:pt-12">
+            <div className="mb-8 sm:mb-10">
+              <div aria-hidden="true" className="focus-heading-accent"><span /></div>
+              <h3 className="font-section text-2xl sm:text-3xl font-bold text-white tracking-wide">Quick Facts</h3>
+              <p className="font-body text-xs sm:text-sm text-slate-400 mt-3">
                 Essential background credentials and current availability
               </p>
             </div>
-          </motion.div>
-
-          {/* 4 Information Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {quickFacts.map((fact, index) => {
-              const Icon = fact.icon;
-              return (
-                <motion.div
-                  key={fact.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
-                  className="group relative rounded-2xl p-6 bg-[#07111F]/70 border border-sky-400/15 backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-sky-400/40 hover:bg-gradient-to-br hover:from-sky-950/30 hover:to-[#07111F] hover:shadow-[0_12px_30px_-6px_rgba(56,189,248,0.2)]"
-                >
-                  {/* Top: Icon or Pulsing Beacon */}
-                  <div className="flex items-center justify-between mb-4">
-                    {fact.isStatus ? (
-                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30">
-                        <span className="flex h-2 w-2 relative">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-fr gap-5 lg:gap-6">
+              {quickFacts.map((fact) => {
+                const Icon = fact.icon;
+                return (
+                  <article key={fact.label} className={`focus-surface focus-fact-card${fact.isStatus ? " focus-fact-available" : ""}`}>
+                    <div className="focus-fact-top">
+                      <div className="focus-icon focus-fact-icon" aria-hidden="true"><Icon size={23} strokeWidth={1.6} /></div>
+                      {fact.isStatus ? (
+                        <span className="focus-status font-body text-[11px] font-medium">
+                          <span aria-hidden="true" className="focus-status-dot" />Active
                         </span>
-                        <span className="font-inter text-[11px] font-medium text-emerald-300">
-                          Active
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center group-hover:scale-110 group-hover:border-sky-400/50 group-hover:bg-sky-400/20 transition-all duration-300">
-                        <Icon className="w-5 h-5 text-sky-400 group-hover:text-cyan-300 transition-colors" />
-                      </div>
-                    )}
-
-                    <span className="font-inter text-[10px] font-semibold tracking-widest uppercase text-slate-400">
-                      {fact.label}
-                    </span>
-                  </div>
-
-                  {/* Fact Value */}
-                  <h4 className="font-dmsans text-base sm:text-lg font-bold text-white group-hover:text-sky-100 transition-colors leading-snug">
-                    {fact.value}
-                  </h4>
-
-                  {/* Secondary descriptor */}
-                  <p className="font-inter text-xs text-slate-400 mt-1 leading-normal">
-                    {fact.secondary}
-                  </p>
-                </motion.div>
-              );
-            })}
+                      ) : fact.label === "Location" ? (
+                        <Globe2 aria-hidden="true" className="h-6 w-6 text-sky-300/25" strokeWidth={1.2} />
+                      ) : (
+                        <span className="focus-fact-detail" aria-hidden="true"><span /><span /><span /></span>
+                      )}
+                    </div>
+                    <span className="font-ui text-[10px] font-semibold tracking-widest uppercase text-sky-200/65 mt-6">{fact.label}</span>
+                    <h4 className="font-section text-lg sm:text-xl font-bold text-white leading-snug mt-3">{fact.value}</h4>
+                    <div className="focus-fact-support">
+                      <p className="font-body text-xs sm:text-sm text-slate-400 leading-normal">{fact.secondary}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

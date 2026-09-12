@@ -28,11 +28,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
           {/* Brand */}
           <div>
-            <p className="font-josefin font-bold text-xl text-white tracking-wide">
+            <p className="font-section font-bold text-xl text-white tracking-wide">
               <span className="text-sky-400">N</span>uwandi
               <span className="text-sky-400">.</span>
             </p>
-            <p className="font-inter mt-2 text-sm text-slate-500 leading-relaxed">
+            <p className="font-body mt-2 text-sm text-slate-500 leading-relaxed">
               Full-Stack Software Engineer
               <br />
               Sri Lanka
@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Nav links */}
           <nav aria-label="Footer navigation">
-            <p className="font-inter text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
+            <p className="font-ui text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
               Navigation
             </p>
             <ul className="space-y-2" role="list">
@@ -64,7 +64,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="font-inter text-sm text-slate-400 hover:text-sky-300 transition-colors duration-200"
+                    className="font-ui text-sm text-slate-400 hover:text-sky-300 transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -75,19 +75,19 @@ export default function Footer() {
 
           {/* Status / CTA */}
           <div>
-            <p className="font-inter text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
+            <p className="font-ui text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
               Availability
             </p>
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-inter text-sm text-slate-300">Open to opportunities</span>
+              <span className="font-body text-sm text-slate-300">Open to opportunities</span>
             </div>
-            <p className="font-inter text-xs text-slate-500">
+            <p className="font-body text-xs text-slate-500">
               Interested in full-stack, AI/ML, or data engineering roles.
             </p>
             <a
               href="/#contact"
-              className="font-dmsans font-semibold mt-4 inline-block text-sm text-sky-400 hover:text-sky-300 transition-colors"
+              className="font-ui font-semibold mt-4 inline-block text-sm text-sky-400 hover:text-sky-300 transition-colors"
             >
               Let&apos;s connect →
             </a>
@@ -96,7 +96,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-sky-400/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-inter text-xs text-slate-500">
+          <p className="font-body text-xs text-slate-500">
             © {new Date().getFullYear()} Nuwandi Dulshara. Built with React + Vite + Tailwind CSS.
           </p>
           <button

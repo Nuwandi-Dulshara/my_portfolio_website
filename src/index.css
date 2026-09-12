@@ -1,24 +1,123 @@
 @import "tailwindcss";
 
+/* Current Focus and Quick Facts share surfaces; typography stays inherited. */
+.focus-showcase { --focus-accent: 56 189 248; }
+.focus-showcase .focus-heading-accent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.focus-showcase .focus-heading-accent span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7dd3fc;
+  box-shadow: 0 0 12px rgb(56 189 248 / 0.4);
+}
+.focus-showcase .focus-heading-accent::after {
+  content: "";
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(56 189 248 / 0.5), transparent);
+}
+.focus-showcase .focus-surface {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgb(var(--focus-accent) / 0.16);
+  background: radial-gradient(ellipse at 0 0, rgb(var(--focus-accent) / 0.075), transparent 70%), linear-gradient(145deg, rgb(10 23 41 / 0.9), rgb(6 15 29 / 0.9));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035), 0 8px 24px rgb(0 0 0 / 0.12);
+  backdrop-filter: blur(12px);
+  transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+.focus-showcase .focus-domain-card { padding: clamp(24px, 2.5vw, 32px); min-height: 220px; }
+.focus-showcase .focus-card-top { display: flex; align-items: center; justify-content: space-between; }
+.focus-showcase .focus-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  color: rgb(var(--focus-accent));
+  border: 1px solid rgb(var(--focus-accent) / 0.23);
+  background: linear-gradient(145deg, rgb(var(--focus-accent) / 0.13), rgb(var(--focus-accent) / 0.025));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 4px 12px rgb(var(--focus-accent) / 0.04);
+}
+.focus-showcase .focus-icon svg { transition: transform 280ms ease; }
+.focus-showcase .focus-circuit { display: flex; align-items: center; gap: 6px; }
+.focus-showcase .focus-circuit span { width: 4px; height: 4px; border: 1px solid rgb(var(--focus-accent) / 0.3); border-radius: 50%; }
+.focus-showcase .focus-circuit span:nth-child(2) { width: 22px; height: 1px; border: 0; background: rgb(var(--focus-accent) / 0.2); }
+.focus-showcase .focus-card-line { display: block; margin-top: 24px; height: 1px; background: linear-gradient(90deg, rgb(var(--focus-accent) / 0.3), rgb(var(--focus-accent) / 0.025)); }
+.focus-showcase .focus-facts { border-top: 1px solid rgb(56 189 248 / 0.14); }
+.focus-showcase .focus-fact-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.2vw, 28px);
+  min-height: 280px;
+}
+.focus-showcase .focus-fact-icon { width: 46px; height: 46px; border-radius: 14px; }
+.focus-showcase .focus-fact-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.focus-showcase .focus-fact-detail { display: flex; align-items: flex-end; gap: 4px; height: 18px; }
+.focus-showcase .focus-fact-detail span { width: 3px; height: 7px; border-radius: 2px; background: rgb(125 211 252 / 0.2); }
+.focus-showcase .focus-fact-detail span:nth-child(2) { height: 12px; }
+.focus-showcase .focus-fact-detail span:nth-child(3) { height: 18px; }
+.focus-showcase .focus-fact-support { margin-top: auto; padding-top: 24px; }
+.focus-showcase .focus-fact-support::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, rgb(125 211 252 / 0.2), rgb(125 211 252 / 0.03));
+}
+.focus-showcase .focus-fact-available { border-color: rgb(125 211 252 / 0.3); }
+.focus-showcase .focus-fact-available::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(125 211 252 / 0.6), transparent);
+}
+.focus-showcase .focus-status { display: inline-flex; align-items: center; gap: 7px; color: #6ee7b7; }
+.focus-showcase .focus-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 3px rgb(52 211 153 / 0.08), 0 0 10px rgb(52 211 153 / 0.3);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .focus-showcase .focus-surface:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--focus-accent) / 0.36);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 12px 28px rgb(0 0 0 / 0.18), 0 0 20px rgb(var(--focus-accent) / 0.055);
+  }
+  .focus-showcase .focus-surface:hover .focus-icon svg { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .focus-showcase .focus-surface, .focus-showcase .focus-icon svg { transition: none; }
+}
+
 @theme {
-  --font-inter: "Inter", system-ui, sans-serif;
-  --font-josefin: "Josefin Sans", system-ui, sans-serif;
-  --font-roboto: "Roboto", system-ui, sans-serif;
-  --font-opensans: "Open Sans", system-ui, sans-serif;
-  --font-rubik: "Rubik", system-ui, sans-serif;
-  --font-dmsans: "DM Sans", system-ui, sans-serif;
-  --font-poppins: "Poppins", system-ui, sans-serif;
-  --font-lato: "Lato", system-ui, sans-serif;
-  --font-nunito: "Nunito", system-ui, sans-serif;
-  --font-ubuntu: "Ubuntu", system-ui, sans-serif;
-  --font-ranade: "Ranade", "Poppins", system-ui, sans-serif;
-  --font-sourcesans: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+  --font-*: initial;
+  --font-heading: "Trebuchet MS", Arial, sans-serif;
+  --font-section: Tahoma, Arial, sans-serif;
+  --font-body: Arial, sans-serif;
+  --font-ui: Verdana, Arial, sans-serif;
+  --font-serif: "Times New Roman", serif;
+  --font-sans: Arial, sans-serif;
+  --default-font-family: Arial, sans-serif;
+  --default-mono-font-family: Arial, sans-serif;
 }
 
 /* ── Custom Design Tokens ───────────────────────────── */
 :root {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-heading: "Josefin Sans", system-ui, sans-serif;
 
   --color-bg-main: #020617;
   --color-bg-secondary: #06111f;
@@ -40,18 +139,12 @@
 }
 
 /* ── Typography Utility Classes ─────────────────────── */
-.font-inter { font-family: "Inter", system-ui, sans-serif; }
-.font-josefin { font-family: "Josefin Sans", system-ui, sans-serif; }
-.font-roboto { font-family: "Roboto", system-ui, sans-serif; }
-.font-opensans { font-family: "Open Sans", system-ui, sans-serif; }
-.font-rubik { font-family: "Rubik", system-ui, sans-serif; }
-.font-dmsans { font-family: "DM Sans", system-ui, sans-serif; }
-.font-poppins { font-family: "Poppins", system-ui, sans-serif; }
-.font-lato { font-family: "Lato", system-ui, sans-serif; }
-.font-nunito { font-family: "Nunito", system-ui, sans-serif; }
-.font-ubuntu { font-family: "Ubuntu", system-ui, sans-serif; }
-.font-ranade { font-family: "Ranade", "Poppins", system-ui, sans-serif; }
-.font-sourcesans { font-family: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif; }
+/* Semantic families also work on elements with global heading/body rules. */
+.font-heading { font-family: var(--font-heading); }
+.font-section { font-family: var(--font-section); }
+.font-body { font-family: var(--font-body); }
+.font-ui { font-family: var(--font-ui); }
+.font-serif { font-family: var(--font-serif); }
 
 /* ── Base Reset & Global ────────────────────────────── */
 *,
@@ -72,7 +165,8 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  line-height: 1.6;
   color: var(--color-text-primary);
 
   background:
@@ -96,14 +190,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-section);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   margin: 0;
 }
 
+h1 { font-family: var(--font-heading); }
+
 p {
+  font-family: var(--font-body);
+  overflow-wrap: anywhere;
   margin: 0;
   line-height: 1.7;
 }
@@ -120,10 +220,32 @@ a {
   text-decoration: none;
 }
 
-button,
-input,
-textarea {
-  font: inherit;
+/* Shared UI typography includes link buttons, navigation and form controls. */
+:where(nav, a, button, input, textarea, select, option, label, kbd, summary, [role="button"], .tech-badge) {
+  font-family: var(--font-ui);
+}
+
+:where(button, input, textarea, select) {
+  line-height: 1.5;
+}
+
+:where(input, textarea, select) { min-width: 0; }
+:where(code, pre, samp) { font-family: var(--font-body); }
+:where(blockquote) { font-family: var(--font-serif); }
+
+/* Fluid section titles share one scale while preserving their existing spacing. */
+.type-section-title {
+  font-family: var(--font-section);
+  font-size: clamp(1.875rem, 1.25rem + 2.5vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.type-page-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 1.25rem + 2.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 /* ── Scrollbar ──────────────────────────────────────── */

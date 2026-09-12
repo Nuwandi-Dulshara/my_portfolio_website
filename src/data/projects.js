@@ -6,6 +6,8 @@ export const PROJECT_FILTERS = [
   "Web Apps",
 ];
 
+// Replace each *_VIDEO_FILE_ID with its individual Google Drive video file ID.
+// Use /file/d/FILE_ID/preview URLs, never a folder URL. Set to null to disable a demo.
 export const projects = [
   {
     id: "pos-system",
@@ -17,9 +19,7 @@ export const projects = [
     categories: ["Freelance", "Full Stack", "Web Apps"],
     technologies: ["PHP 8.2", "Laravel 12", "MySQL", "Blade", "Tailwind CSS", "Alpine.js", "Vite"],
     image: "/images/projects/pos-system.png",
-    demoVideo: "/videos/POS-system.mp4",
-    video: "/videos/POS-system.mp4",
-    videoType: "mp4",
+    demoVideoUrl: "https://drive.google.com/file/d/1zEWUOFqN_1NqIRyslK38QqYnQLEF9M__/preview",
     github: null,
     liveDemo: null,
     privateRepository: true,
@@ -82,9 +82,7 @@ export const projects = [
     categories: ["Freelance", "Full Stack", "Web Apps"],
     technologies: ["PHP 8.2+", "Laravel 12", "MySQL", "Blade", "Bootstrap", "Tailwind CSS", "JavaScript"],
     image: "/images/projects/course-management.png",
-    demoVideo: "/videos/Course-management-system.mp4",
-    video: "/videos/Course-management-system.mp4",
-    videoType: "mp4",
+    demoVideoUrl: "https://drive.google.com/file/d/16tfn5xgP-3MLmmlBdwqGlwkck8O2VAZS/preview",
     github: null,
     liveDemo: null,
     privateRepository: true,
@@ -157,9 +155,7 @@ export const projects = [
     categories: ["Freelance", "Full Stack", "Web Apps"],
     technologies: ["Next.js 16", "React 19", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS", "Framer Motion"],
     image: "/images/projects/opening-invitation.png",
-    demoVideo: "/videos/opening-invitation.mp4",
-    video: "/videos/opening-invitation.mp4",
-    videoType: "mp4",
+    demoVideoUrl: "https://drive.google.com/file/d/1FUZwxZ6MEPw1sKNuB4f3EtdyGeHtn8Qz/preview",
     github: null,
     liveDemo: null,
     privateRepository: true,
@@ -227,9 +223,7 @@ export const projects = [
     categories: ["AI / Smart Apps", "Full Stack", "Web Apps"],
     technologies: ["React 19", "FastAPI", "Python", "SQLAlchemy", "SQLite", "Pandas", "scikit-learn"],
     image: "/images/projects/task-expense-manager.png",
-    demoVideo: "/videos/taskmanager-with-AIexpensetracker.mp4",
-    video: "/videos/taskmanager-with-AIexpensetracker.mp4",
-    videoType: "mp4",
+    demoVideoUrl: "https://drive.google.com/file/d/1L6sLGNka1tSelWsWiHRgzoQuD80wly3-/preview",
     github: null,
     liveDemo: null,
     privateRepository: true,
@@ -298,9 +292,7 @@ export const projects = [
     categories: ["Web Apps"],
     technologies: ["React 19", "JavaScript", "Framer Motion", "CSS3", "Canvas API", "Web Audio", "Vite"],
     image: "/images/projects/birthday-wish.png",
-    demoVideo: "/videos/Birthday-wish.mp4",
-    video: "/videos/Birthday-wish.mp4",
-    videoType: "mp4",
+    demoVideoUrl: "https://drive.google.com/file/d/1OOaTDhPCitU1ilnnWXi1JCCrtfasJZO7/preview",
     github: null,
     liveDemo: null,
     privateRepository: true,

@@ -60,7 +60,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            className="font-josefin font-bold text-xl text-white tracking-wide hover:text-sky-300 transition-colors duration-200"
+            className="font-ui font-bold text-xl text-white tracking-wide hover:text-sky-300 transition-colors duration-200"
             aria-label="Nuwandi Dulshara — Home"
           >
             <span className="text-sky-400">N</span>uwandi
@@ -74,7 +74,7 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="font-inter px-4 py-2 text-sm text-slate-400 hover:text-sky-300 rounded-full hover:bg-sky-400/8 transition-all duration-200"
+                  className="font-ui px-4 py-2 text-sm text-slate-400 hover:text-sky-300 rounded-full hover:bg-sky-400/8 transition-all duration-200"
                 >
                   {link.label}
                 </a>
@@ -87,7 +87,7 @@ export default function Navbar() {
             <a
               href="/resume/nuwandi-dulshara-resume.pdf"
               download
-              className="font-poppins px-4 py-2 rounded-full text-xs sm:text-sm font-medium border border-sky-400/30 bg-sky-400/8 text-sky-300 hover:bg-sky-400/18 hover:border-sky-400/55 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition-all duration-200"
+              className="font-ui px-4 py-2 rounded-full text-xs sm:text-sm font-medium border border-sky-400/30 bg-sky-400/8 text-sky-300 hover:bg-sky-400/18 hover:border-sky-400/55 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition-all duration-200"
             >
               Download CV
             </a>
@@ -132,7 +132,7 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="font-inter block px-4 py-3 text-base text-slate-300 hover:text-sky-300 rounded-xl hover:bg-sky-400/8 transition-all duration-200"
+                  className="font-ui block px-4 py-3 text-base text-slate-300 hover:text-sky-300 rounded-xl hover:bg-sky-400/8 transition-all duration-200"
                 >
                   {link.label}
                 </a>
@@ -144,7 +144,7 @@ export default function Navbar() {
             <a
               href="/resume/nuwandi-dulshara-resume.pdf"
               download
-              className="font-poppins block w-full text-center px-4 py-3 rounded-full text-sm font-medium border border-sky-400/30 bg-sky-400/8 text-sky-300 hover:bg-sky-400/18"
+              className="font-ui block w-full text-center px-4 py-3 rounded-full text-sm font-medium border border-sky-400/30 bg-sky-400/8 text-sky-300 hover:bg-sky-400/18"
             >
               Download CV
             </a>
