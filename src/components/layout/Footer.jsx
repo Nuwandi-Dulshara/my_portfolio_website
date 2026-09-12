@@ -11,7 +11,7 @@ const footerLinks = [
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/Nuwandi-Dulshara", icon: GitFork },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/nuwandi-dulshara-523365251/", icon: Link },
-  { label: "Email", href: "mailto:nuwandi@example.com", icon: Mail },
+  { label: "Email", href: "mailto:nuwandiliyanage1107@gmail.com", icon: Mail },
 ];
 
 export default function Footer() {

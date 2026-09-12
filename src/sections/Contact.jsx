@@ -14,15 +14,15 @@ import GlassCard from "../components/ui/GlassCard";
 const contactMethods = [
   {
     label: "Email",
-    value: "nuwandi@example.com",
-    href: "mailto:nuwandi@example.com",
+    value: "nuwandiliyanage1107@gmail.com",
+    href: "mailto:nuwandiliyanage1107@gmail.com",
     icon: Mail,
     description: "Best for project enquiries",
   },
   {
     label: "LinkedIn",
     value: "Nuwandi Dulshara",
-    href: "https://linkedin.com/in/nuwandi-dulshara",
+    href: "https://www.linkedin.com/in/nuwandi-dulshara-523365251/",
     icon: Link,
     description: "Professional profile",
   },
