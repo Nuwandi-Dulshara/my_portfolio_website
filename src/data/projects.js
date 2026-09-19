@@ -29,7 +29,7 @@ export const PROJECT_CATEGORIES = [
     badge: "Interactive & Creative",
     description:
       "Engaging, high-performance web applications built with modern frontend frameworks, rich animations, and responsive design.",
-    projectIds: ["birthday-wish"],
+    projectIds: ["personal-document-tracker", "birthday-wish"],
   },
 ];
 
@@ -316,6 +316,143 @@ export const projects = [
     limitations:
       "Expense and budget records are user-associated, but the current task model has no user ownership field and task endpoints do not enforce authentication. Appropriate next steps include user-specific task access, held-out model evaluation, and updating outdated expense documentation.",
     role: "Full-Stack Developer — architecture, UI development, data flow design, and intelligent feature planning.",
+  },
+  {
+    id: "personal-document-tracker",
+    displayName: "Document Expiry Tracker",
+    categoryGroup: "web-apps",
+    title: "Personal Document Expiry Tracker",
+    shortDescription:
+      "A full-stack Angular 21 and .NET 10 web application that manages time-sensitive documents, calculating calendar-accurate notifications without UTC drift and tracking unread urgency states.",
+    fullDescription:
+      "The Personal Document Expiry Tracker is a full-stack web application that helps users manage time-sensitive personal documents such as passports, driving licences, insurance policies, certificates, warranties, memberships, and vehicle documents. Connected to an ASP.NET Core REST API and MySQL database, it applies authentication, ownership checks, date-only status evaluations, single-record read tracking, and real-time dashboard reminders.",
+    categories: ["Full Stack", "Web Apps"],
+    technologies: [
+      "Angular 21",
+      ".NET 10",
+      "C#",
+      "ASP.NET Core Web API",
+      "Entity Framework Core 9",
+      "MySQL",
+      "TypeScript 5.9",
+      "Angular Material",
+      "Angular Signals",
+      "RxJS",
+      "JWT Bearer",
+      "Vitest",
+      "Playwright",
+    ],
+    image: "/images/projects/personal-document-tracker.png",
+    demoVideoUrl: "https://drive.google.com/file/d/1IpwPn5y9ocrWn8S5_2459KLBBJ92aMB-/preview",
+    github: "https://github.com/Nuwandi-Dulshara/personal-document-expiry-tracker",
+    liveDemo: null,
+    privateRepository: false,
+    featured: true,
+    caseStudy: "/projects/personal-document-tracker",
+    userRoles: ["Registered User / Account Holder"],
+    workflow: [
+      "User registers and signs in via JWT bearer authentication with ASP.NET Core password hashing",
+      "User creates or edits personal documents with issue date, expiry date, reminder date, and category",
+      "Validation enforces that expiry date follows issue date and reminder date precedes or matches expiry",
+      "Calendar-date calculation engine applies DateOnly logic to classify status without UTC drift",
+      "Status transitions (ReminderActive, ExpiresToday, Expired) trigger header bell and dashboard updates",
+      "Single-record read-state mechanism tracks LastReadStatus, re-alerting user when urgency changes",
+      "User reviews reminders, updates or renews records, and maintains private, isolated document vaults",
+    ],
+    modules: [
+      {
+        title: "Document Lifecycle & Validation",
+        description:
+          "Full CRUD operations, categorization, search, filtering, and validation requiring valid sequence between issue, reminder, and expiry dates.",
+      },
+      {
+        title: "DateOnly Notification Engine",
+        description:
+          "Evaluates ReminderActive, ExpiresToday, and Expired states strictly through calendar-date calculations, preventing notifications from appearing one day early due to UTC shifts.",
+      },
+      {
+        title: "State-Transition Read Tracking",
+        description:
+          "Enforces a single DocumentNotification record per document storing LastReadStatus; preserves read status until urgency transitions, preventing database notification spam.",
+      },
+      {
+        title: "Dashboard & Urgency Views",
+        description:
+          "Real-time summary metrics for Expiring Soon, Expiring Today, and Expired documents, paired with a dedicated Reminders page and header notification bell.",
+      },
+      {
+        title: "Authentication & Account Security",
+        description:
+          "ASP.NET Core password hashing with PasswordHasher<TUser>, JWT bearer authentication, Angular route guards, and strict user-isolated database queries.",
+      },
+      {
+        title: "Settings & Profile Management",
+        description:
+          "Configurable default reminder windows, custom warning preferences, and user profile management.",
+      },
+    ],
+    stackDetails: [
+      {
+        name: "Frontend",
+        purpose:
+          "Angular 21, TypeScript 5.9, Angular Material, Angular CDK, Angular Router, Angular Forms, Signals, RxJS, SCSS",
+      },
+      {
+        name: "Backend",
+        purpose:
+          "C#, .NET 10, ASP.NET Core Web API, Entity Framework Core 9",
+      },
+      {
+        name: "Database",
+        purpose:
+          "MySQL, Pomelo EF Core MySQL provider, EF Core migrations",
+      },
+      {
+        name: "Security",
+        purpose:
+          "JWT bearer authentication and ASP.NET Core password hashing",
+      },
+      {
+        name: "API Documentation",
+        purpose:
+          "Swagger/OpenAPI with JWT Bearer authorization support",
+      },
+      {
+        name: "Testing",
+        purpose:
+          "Vitest, jsdom, and Playwright for unit and end-to-end testing",
+      },
+      {
+        name: "Development Tools",
+        purpose:
+          "Angular CLI, .NET CLI, npm, Prettier, Git, MySQL Workbench, and WampServer",
+      },
+    ],
+    screenshots: [],
+    problem:
+      "People often manage important documents in different places and rely on memory or calendar entries to renew them. Missing an expiry date can cause travel disruption, legal issues, loss of insurance coverage, or extra renewal costs. Furthermore, many web-based reminder systems suffer from time-zone drift—causing notifications to trigger one day early when UTC dates are parsed across local time zones—or bloat databases with redundant daily notification records.",
+    solution:
+      "The system couples an Angular 21 frontend with an ASP.NET Core Web API (.NET 10) and a MySQL database using EF Core 9. Document dates remain the authoritative source of truth. By treating dates as calendar entities using C# DateOnly and component-based frontend calculations, the system completely prevents notifications from appearing one day early. It uses a single-row read-state model that tracks LastReadStatus, avoiding daily database clutter while ensuring users are alerted immediately upon every critical status transition (ReminderActive → ExpiresToday → Expired).",
+    architecture:
+      "Angular 21 SPA (standalone components, signals, Angular Material, SCSS) → HTTPS / JSON REST API with JWT Bearer tokens → ASP.NET Core Web API (.NET 10 controllers & business services) → Entity Framework Core 9 (Pomelo MySQL provider & migrations) → MySQL database. All date calculations extract year/month/day calendar components and leverage C# DateOnly to eliminate UTC time-zone drift.",
+    features: [
+      "User registration & login with JWT bearer authentication and ASP.NET Core password hashing",
+      "Complete document CRUD with category assignment, search, filtering, and sorting",
+      "Strict sequence validation (Expiry > Issue, Reminder <= Expiry)",
+      "Calendar-date calculation using C# DateOnly to prevent one-day-early expiry notifications",
+      "Notification bell with real-time unread badge count in authenticated header",
+      "Interactive Dashboard totals for Expiring Soon, Expiring Today, and Expired",
+      "Dedicated Reminders page grouped by Expires Today, Expired, and Reminder Active",
+      "Single-row notification read-state tracking that re-alerts on status transitions",
+      "Strict user-specific data isolation on all endpoints and queries",
+      "Interactive Swagger/OpenAPI documentation with JWT Bearer authorization support",
+      "Comprehensive automated testing with Vitest, jsdom, and Playwright",
+    ],
+    challenges:
+      "Key engineering challenges included: 1) Preventing one-day-early expiry notifications caused by UTC timestamp conversions across different local time zones by enforcing calendar-date extraction and C# DateOnly. 2) Eliminating database bloat caused by generating daily notification instances by storing only the LastReadStatus. 3) Building reactive notification indicators across the header bell, Dashboard, and Reminders views that automatically recalculate at local midnight, on login, or when documents are updated. 4) Enforcing strict data isolation so that every query and mutation is bound to the authenticated user ID.",
+    results:
+      "The finished system provides a centralized, secure workspace for monitoring personal documents. Built with modern Angular 21 and .NET 10, it successfully eliminates premature UTC-driven notifications, maintains a clean and minimal database footprint through state-transition tracking, and delivers an intuitive, responsive user experience backed by automated tests across Vitest, jsdom, and Playwright.",
+    role: "Full-Stack Developer — complete system architecture, Angular 21 frontend UI, .NET 10 REST API backend, EF Core 9 database design, calendar date-only notification engine, and automated testing setup.",
   },
   {
     id: "birthday-wish",

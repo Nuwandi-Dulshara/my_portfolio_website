@@ -8,6 +8,7 @@ Place your `.webp` project thumbnail images here.
 - `course-management.webp` — Course Management Platform screenshot
 - `ai-ayurveda.webp` — AI Ayurveda screenshot
 - `task-expense-manager.webp` — Task & Expense Manager screenshot
+- `personal-document-tracker.png` / `.webp` — Personal Document Expiry Tracker screenshot
 - `wedding-site.webp` — Wedding Website screenshot
 - `birthday-wish.webp` — Birthday Wish App screenshot
 - `og-image.webp` — Open Graph image (1200×630px) for social sharing
