@@ -20,7 +20,7 @@ export default function Projects() {
           <SectionTitle
             label="Portfolio"
             title="Projects"
-            subtitle="A selection of full-stack applications, AI systems, and software products I have designed and built."
+            subtitle="A selection of freelance solutions, full-stack applications, AI-powered systems, and software products I have designed and developed."
           />
         </motion.div>
 

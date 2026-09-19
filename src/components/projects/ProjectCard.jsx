@@ -1,82 +1,98 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { FileText, Play, Rotate3D } from "lucide-react";
+import { Play, FileText, Lock } from "lucide-react";
+import TechBadge from "../ui/TechBadge";
 import VideoModal from "./VideoModal";
 
 const SHARED_CARD_BACK = "/images/projects/project-card-back.png";
 
 export default function ProjectCard({ project }) {
-  const [flipped, setFlipped] = useState(false);
-  const [actionsVisible, setActionsVisible] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
-  const [backImageError, setBackImageError] = useState(false);
-  const [projectImageError, setProjectImageError] = useState(false);
-  const pointerStart = useRef(null);
-  const demoButtonRef = useRef(null);
-  const reduceMotion = useReducedMotion();
+  const [imageError, setImageError] = useState(false);
 
-  const activateCard = () => {
-    if (!flipped) setFlipped(true);
-    else setActionsVisible((value) => !value);
-  };
-  const handlePointerDown = (event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; };
-  const handlePointerUp = (event) => {
-    if (!pointerStart.current) return;
-    const distance = Math.hypot(event.clientX - pointerStart.current.x, event.clientY - pointerStart.current.y);
-    pointerStart.current = null;
-    if (distance <= 8) activateCard();
-  };
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      activateCard();
-    }
-  };
-  const closeVideo = () => {
-    setVideoOpen(false);
-    requestAnimationFrame(() => demoButtonRef.current?.focus());
-  };
+  const displayImage = !imageError && (project.image || project.thumbnail)
+    ? (project.image || project.thumbnail)
+    : SHARED_CARD_BACK;
+
+  const projectTitle = project.displayName || project.title;
 
   return (
     <>
-      <div className="project-card-perspective h-[430px] select-none">
-        <motion.article animate={{ rotateY: flipped ? 180 : 0 }} transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }} className="project-card-inner relative h-full w-full" aria-label={`${project.title} interactive project card`}>
-          <button type="button" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onKeyDown={handleKeyDown} className="project-card-face absolute inset-0 overflow-hidden rounded-3xl border border-sky-400/25 bg-slate-950 shadow-[0_22px_70px_rgba(0,0,0,0.38)] transition duration-500 hover:-translate-y-1 hover:border-sky-300/55 hover:shadow-[0_25px_80px_rgba(14,165,233,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300" aria-label={`Reveal ${project.title}`}>
-            {!backImageError ? (
-              <img src={SHARED_CARD_BACK} alt="" onError={() => setBackImageError(true)} className="h-full w-full object-cover" draggable="false" />
-            ) : (
-              <span aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.22),transparent_42%),linear-gradient(145deg,#07182d,#020617)]" />
-            )}
-            <span className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-sky-300/25 bg-slate-950/65 px-4 py-2 text-xs font-medium text-sky-100 backdrop-blur-lg"><Rotate3D className="h-4 w-4" /> Tap to reveal</span>
-          </button>
+      <article className="group relative flex flex-col h-full rounded-2xl border border-sky-400/20 bg-slate-900/60 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-sky-400/45 hover:shadow-[0_14px_45px_rgba(14,165,233,0.18)] hover:-translate-y-1.5">
+        {/* Project Image */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950/80 border-b border-sky-400/10">
+          <img
+            src={displayImage}
+            alt={`${projectTitle} preview`}
+            onError={() => setImageError(true)}
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
 
-          <div className="project-card-face project-card-front absolute inset-0 overflow-hidden rounded-3xl border border-sky-400/30 bg-slate-950 shadow-[0_22px_70px_rgba(0,0,0,0.4)]">
-            <button type="button" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onKeyDown={handleKeyDown} className="absolute inset-0 h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-300" aria-label={`${actionsVisible ? "Hide" : "Show"} actions for ${project.title}`}>
-              {!projectImageError ? (
-                <img src={project.image || project.thumbnail} alt={`${project.title} project preview`} onError={() => setProjectImageError(true)} className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]" draggable="false" />
-              ) : (
-                <span className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sky-950 via-slate-900 to-blue-950 text-xs uppercase tracking-[0.22em] text-sky-200/60">Image coming soon</span>
-              )}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent px-5 pb-6 pt-24 text-left">
-                <h3 className="font-heading text-xl font-bold text-white">{project.title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-300">{project.shortDescription}</p>
-              </div>
-            </button>
-            <AnimatePresence>
-              {actionsVisible && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950/72 p-6 backdrop-blur-md" onClick={() => setActionsVisible(false)}>
-                  <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduceMotion ? 0 : 12 }} className="grid w-full max-w-[230px] gap-3" onClick={(event) => event.stopPropagation()}>
-                    <button ref={demoButtonRef} type="button" disabled={!project.demoVideoUrl} onClick={() => setVideoOpen(true)} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-sky-300/50 bg-sky-400/20 px-4 text-sm font-semibold text-white transition hover:bg-sky-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-45"><Play className="h-4 w-4 fill-current" /> Watch Demo</button>
-                    <Link to={project.caseStudy || `/projects/${project.id}`} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-sky-300/25 bg-slate-900/75 px-4 text-sm font-semibold text-sky-100 transition hover:border-sky-300/50 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"><FileText className="h-4 w-4" /> Case Study</Link>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          {/* Featured / Private Badges overlay */}
+          <div className="absolute top-3 right-3 flex items-center gap-2">
+            {project.privateRepository && (
+              <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-950/80 border border-slate-700/60 text-slate-300 backdrop-blur-md shadow-sm">
+                <Lock className="w-3 h-3 text-slate-400" />
+                Private
+              </span>
+            )}
           </div>
-        </motion.article>
-      </div>
-      {videoOpen && <VideoModal project={project} onClose={closeVideo} />}
+        </div>
+
+        {/* Card Content */}
+        <div className="flex flex-col flex-1 p-5 sm:p-6">
+          {/* Main Title */}
+          <h3 className="font-heading text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-sky-300 transition-colors duration-200">
+            {projectTitle}
+          </h3>
+
+          {/* Short Description */}
+          {project.shortDescription && (
+            <p className="mt-2.5 text-sm text-slate-300/80 leading-relaxed line-clamp-2">
+              {project.shortDescription}
+            </p>
+          )}
+
+          {/* Basic Technology Stack */}
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {project.technologies?.slice(0, 5).map((tech) => (
+              <TechBadge key={tech} tech={tech} size="xs" />
+            ))}
+            {project.technologies?.length > 5 && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium text-slate-400 bg-slate-800/40 border border-slate-700/40">
+                +{project.technologies.length - 5}
+              </span>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="mt-6 pt-4 border-t border-sky-400/10 flex items-center justify-between gap-3 mt-auto">
+            {project.demoVideoUrl ? (
+              <button
+                type="button"
+                onClick={() => setVideoOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-sky-400/15 border border-sky-400/30 text-sky-200 hover:bg-sky-400/25 hover:border-sky-400/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 transition-all duration-200"
+              >
+                <Play className="w-3.5 h-3.5 fill-current" />
+                Watch Demo
+              </button>
+            ) : (
+              <div />
+            )}
+
+            <Link
+              to={project.caseStudy || `/projects/${project.id}`}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 border border-slate-700/60 text-slate-200 hover:bg-slate-700/80 hover:text-white hover:border-sky-400/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 transition-all duration-200 ml-auto"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              Case Study
+            </Link>
+          </div>
+        </div>
+      </article>
+
+      {videoOpen && <VideoModal project={project} onClose={() => setVideoOpen(false)} />}
     </>
   );
 }
