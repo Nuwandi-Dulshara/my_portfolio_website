@@ -1,80 +1,147 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Briefcase, Cpu, Globe, LayoutGrid } from "lucide-react";
 import ProjectCard from "./ProjectCard";
+import { PROJECT_CATEGORIES } from "../../data/projects";
+
+const CATEGORY_ICONS = {
+  freelance: Briefcase,
+  "ai-smart": Cpu,
+  "web-apps": Globe,
+};
 
 export default function ProjectGrid({ projects }) {
-  const sliderRef = useRef(null);
-  const reduceMotion = useReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const goToSlide = (index) => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-    const cards = slider.querySelectorAll("[data-project-card]");
-    const card = cards[index];
-    if (!card) return;
-    slider.scrollTo({
-      left: card.offsetLeft - (slider.clientWidth - card.clientWidth) / 2,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
-    setActiveIndex(index);
-  };
+  // Map project IDs to category objects
+  const categorizedData = PROJECT_CATEGORIES.map((category) => {
+    const categoryProjects = category.projectIds
+      .map((id) => projects.find((p) => p.id === id))
+      .filter(Boolean);
 
-  useEffect(() => {
-    if (projects.length < 2) return undefined;
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => {
-        const next = (current + 1) % projects.length;
-        const slider = sliderRef.current;
-        const card = slider?.querySelectorAll("[data-project-card]")[next];
-        if (slider && card) {
-          slider.scrollTo({
-            left: card.offsetLeft - (slider.clientWidth - card.clientWidth) / 2,
-            behavior: reduceMotion ? "auto" : "smooth",
-          });
-        }
-        return next;
-      });
-    }, 4500);
-    return () => window.clearInterval(timer);
-  }, [projects.length, reduceMotion]);
+    return {
+      ...category,
+      projects: categoryProjects,
+    };
+  });
 
-  const handleScroll = () => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-    const center = slider.scrollLeft + slider.clientWidth / 2;
-    const cards = [...slider.querySelectorAll("[data-project-card]")];
-    const closest = cards.reduce((best, card, index) => {
-      const distance = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
-      return distance < best.distance ? { index, distance } : best;
-    }, { index: 0, distance: Number.POSITIVE_INFINITY });
-    setActiveIndex(closest.index);
-  };
+  // Filter based on active tab
+  const displayedCategories =
+    activeCategory === "all"
+      ? categorizedData
+      : categorizedData.filter((cat) => cat.id === activeCategory);
 
   return (
-    <div className="relative">
-      <div className="mb-6">
-        <p className="max-w-xl text-sm leading-relaxed text-slate-400">Choose a card to reveal the project, then tap the image again for its demo and case study.</p>
+    <div className="space-y-12 md:space-y-16">
+      {/* Category Filter Tabs */}
+      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 pb-2" role="tablist" aria-label="Project categories">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeCategory === "all"}
+          onClick={() => setActiveCategory("all")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 border ${
+            activeCategory === "all"
+              ? "border-sky-400 bg-sky-400/20 text-white shadow-[0_0_20px_rgba(56,189,248,0.35)]"
+              : "border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+          }`}
+        >
+          <LayoutGrid className="w-4 h-4 text-sky-400" />
+          <span>All Projects</span>
+          <span className="ml-1 text-[11px] px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-300">
+            {projects.length}
+          </span>
+        </button>
+
+        {PROJECT_CATEGORIES.map((category) => {
+          const Icon = CATEGORY_ICONS[category.id] || LayoutGrid;
+          const isActive = activeCategory === category.id;
+          const count = category.projectIds.length;
+
+          return (
+            <button
+              key={category.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setActiveCategory(category.id)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 border ${
+                isActive
+                  ? "border-sky-400 bg-sky-400/20 text-white shadow-[0_0_20px_rgba(56,189,248,0.35)]"
+                  : "border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+              }`}
+            >
+              <Icon className="w-4 h-4 text-sky-400" />
+              <span>{category.title}</span>
+              <span className="ml-1 text-[11px] px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-300">
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
-      <div ref={sliderRef} onScroll={handleScroll} className="project-slider flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-5 pt-2" aria-label="Project carousel">
-        {projects.map((project, index) => (
-          <motion.div key={project.id} data-project-card className="w-[84vw] max-w-[370px] shrink-0 snap-center sm:w-[46vw] lg:w-[31%]" initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : index * 0.08 }}>
-            <ProjectCard project={project} />
-          </motion.div>
-        ))}
-      </div>
-      <div className="mt-2 flex items-center justify-center gap-2" role="group" aria-label="Choose project slide">
-        {projects.map((project, index) => (
-          <button
-            key={project.id}
-            type="button"
-            onClick={() => goToSlide(index)}
-            aria-label={`Go to ${project.title}`}
-            aria-current={activeIndex === index ? "true" : undefined}
-            className={`h-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${activeIndex === index ? "w-7 bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.65)]" : "w-2.5 bg-slate-600 hover:bg-sky-300/70"}`}
-          />
-        ))}
-      </div>
+
+      {/* Categorized Sections with Fixed Grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeCategory}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.35 }}
+          className="space-y-16 md:space-y-20"
+        >
+          {displayedCategories.map((category, catIndex) => {
+            const Icon = CATEGORY_ICONS[category.id] || LayoutGrid;
+
+            return (
+              <section
+                key={category.id}
+                aria-labelledby={`category-title-${category.id}`}
+                className={catIndex > 0 ? "pt-12 border-t border-sky-400/10" : ""}
+              >
+                {/* Category Header */}
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-400/10 border border-sky-400/25 text-sky-300 mb-3">
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{category.badge}</span>
+                    </div>
+                    <h3
+                      id={`category-title-${category.id}`}
+                      className="font-heading text-2xl sm:text-3xl font-bold text-white tracking-tight"
+                    >
+                      {category.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-400 max-w-2xl leading-relaxed">
+                      {category.description}
+                    </p>
+                  </div>
+                  <span className="text-xs text-slate-500 font-mono self-start sm:self-auto">
+                    {category.projects.length}{" "}
+                    {category.projects.length === 1 ? "project" : "projects"}
+                  </span>
+                </div>
+
+                {/* Fixed Responsive Card Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                  {category.projects.map((project, projIndex) => (
+                    <motion.div
+                      key={project.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: projIndex * 0.08 }}
+                      className="h-full"
+                    >
+                      <ProjectCard project={project} />
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

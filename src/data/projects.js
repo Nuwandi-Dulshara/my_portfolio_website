@@ -6,11 +6,40 @@ export const PROJECT_FILTERS = [
   "Web Apps",
 ];
 
+export const PROJECT_CATEGORIES = [
+  {
+    id: "freelance",
+    title: "Freelance Projects",
+    badge: "Client Solutions",
+    description:
+      "Production-grade, bespoke client solutions delivering end-to-end business value, reliable workflows, and operational excellence.",
+    projectIds: ["pos-system", "course-management", "opening-invitation"],
+  },
+  {
+    id: "ai-smart",
+    title: "AI & Smart Applications",
+    badge: "Machine Learning & Full Stack",
+    description:
+      "Intelligent applications combining modern web architecture with machine learning capabilities for analytics and smart workflows.",
+    projectIds: ["task-expense-manager"],
+  },
+  {
+    id: "web-apps",
+    title: "Web Applications",
+    badge: "Interactive & Creative",
+    description:
+      "Engaging, high-performance web applications built with modern frontend frameworks, rich animations, and responsive design.",
+    projectIds: ["birthday-wish"],
+  },
+];
+
 // Replace each *_VIDEO_FILE_ID with its individual Google Drive video file ID.
 // Use /file/d/FILE_ID/preview URLs, never a folder URL. Set to null to disable a demo.
 export const projects = [
   {
     id: "pos-system",
+    displayName: "POS System",
+    categoryGroup: "freelance",
     title: "Hardware POS & Inventory System",
     shortDescription:
       "A Laravel-based point-of-sale and inventory platform for hardware retail, covering product variants, billing, returns, staff permissions, stock control, and operational reporting.",
@@ -74,6 +103,8 @@ export const projects = [
   },
   {
     id: "course-management",
+    displayName: "Course Management System",
+    categoryGroup: "freelance",
     title: "OAS Academy",
     shortDescription:
       "A full-stack learning and academy management platform connecting course discovery, enrollment, installment payments, video learning, staff commissions, and administration.",
@@ -147,6 +178,8 @@ export const projects = [
   },
   {
     id: "opening-invitation",
+    displayName: "Opening Invitation System",
+    categoryGroup: "freelance",
     title: "Salon Calm Place Invitation",
     shortDescription:
       "A full-stack digital invitation and RSVP platform for a salon grand opening, with personalized family links, member-level attendance, QR sharing, and organizer analytics.",
@@ -215,6 +248,8 @@ export const projects = [
   },
   {
     id: "task-expense-manager",
+    displayName: "AI Task & Expense Manager",
+    categoryGroup: "ai-smart",
     title: "Organix AI",
     shortDescription:
       "A full-stack task, time, and expense management platform with monthly budgets, financial dashboards, category prediction, and unusual-spending detection.",
@@ -284,6 +319,8 @@ export const projects = [
   },
   {
     id: "birthday-wish",
+    displayName: "Birthday Wish App",
+    categoryGroup: "web-apps",
     title: "Personalized Birthday Surprise",
     shortDescription:
       "A personalized ten-stage birthday journey combining messages, photographs, music, animated reveals, interactive candles, gifts, video, and fireworks.",
