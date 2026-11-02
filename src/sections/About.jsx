@@ -11,8 +11,6 @@ import {
   CircleCheck,
   GraduationCap,
   Briefcase,
-  Sparkles,
-  Terminal,
 } from "lucide-react";
 
 // Current focus areas with respective icons and descriptions
@@ -137,11 +135,10 @@ export default function About() {
           </motion.h2>
         </div>
 
-        {/* ── 3. TWO-COLUMN HERO-STYLE LAYOUT ───────────────────────────────── */}
+        {/* ── 3. INTRODUCTION ──────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-24 md:mb-32">
-          {/* ── LEFT SIDE: INTRODUCTION WITH SCROLL ACCENT ── */}
           <motion.div
-            className="lg:col-span-7 flex gap-5 sm:gap-7"
+            className="lg:col-span-12 flex gap-5 sm:gap-7"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -195,97 +192,6 @@ export default function About() {
                 , with a strong interest in building intelligent, data-driven
                 systems that solve real-world problems.
               </p>
-            </div>
-          </motion.div>
-
-          {/* ── RIGHT SIDE: DEVELOPER VISUAL CARD ── */}
-          <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, x: 25 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.65, delay: 0.15 }}
-          >
-            <div className="relative rounded-3xl p-6 sm:p-7 md:p-8 bg-[#07111F]/80 border border-sky-400/25 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(56,189,248,0.12)] overflow-hidden group hover:border-sky-400/40 transition-all duration-300">
-              {/* Subtle decorative background watermark */}
-              <div
-                aria-hidden="true"
-                className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-ui font-black text-sky-400/[0.04] select-none pointer-events-none"
-              >
-                &lt;/&gt;
-              </div>
-
-              {/* Top Bar: macOS-style indicator dots + terminal badge */}
-              <div className="flex items-center justify-between pb-4 mb-5 border-b border-sky-400/15">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                </div>
-                <span className="font-ui text-[11px] font-ui tracking-widest uppercase text-sky-400/80">
-                  SYSTEM // ARCHITECTURE
-                </span>
-              </div>
-
-              {/* Title & Tagline */}
-              <div className="mb-6">
-                <p className="font-ui text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
-                  <Terminal className="w-5 h-5 text-sky-400 shrink-0" />
-                  <span>&lt; Full-Stack Engineer /&gt;</span>
-                </p>
-                <p className="font-section text-xs sm:text-sm text-sky-300/80 mt-1.5 leading-snug">
-                  Building Software • Exploring Intelligence • Solving Real
-                  Problems
-                </p>
-              </div>
-
-              {/* Minimalist Neural & Workflow Architecture graphic */}
-              <div className="p-4 rounded-2xl bg-[#030712]/70 border border-sky-400/15 font-ui text-xs space-y-3">
-                <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-white/5">
-                  <span className="flex items-center gap-1.5 text-sky-300">
-                    <Sparkles className="w-3.5 h-3.5" /> Pipeline Active
-                  </span>
-                  <span className="text-emerald-400">status: 200 OK</span>
-                </div>
-
-                {/* Interactive Node Flow: Data -> Model -> API -> Interface */}
-                <div className="grid grid-cols-4 gap-1.5 text-center py-2">
-                  <div className="p-2 rounded-xl bg-sky-500/10 border border-sky-400/20 text-sky-200">
-                    <span className="block text-[10px] text-slate-400">Input</span>
-                    <span className="font-semibold text-xs text-white">Data</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-400/20 text-blue-200">
-                    <span className="block text-[10px] text-slate-400">Core</span>
-                    <span className="font-semibold text-xs text-white">Model</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-200">
-                    <span className="block text-[10px] text-slate-400">Service</span>
-                    <span className="font-semibold text-xs text-white">API</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-sky-500/10 border border-sky-400/20 text-sky-200">
-                    <span className="block text-[10px] text-slate-400">User</span>
-                    <span className="font-semibold text-xs text-white">UI/UX</span>
-                  </div>
-                </div>
-
-                {/* Code execution simulation */}
-                <div className="text-[11px] leading-relaxed text-slate-400 pt-1">
-                  <span className="text-blue-400">const</span>{" "}
-                  <span className="text-sky-200">developer</span> = &#123;
-                  <br />
-                  &nbsp;&nbsp;stack: [
-                  <span className="text-emerald-300">&quot;React&quot;</span>,{" "}
-                  <span className="text-emerald-300">&quot;Next.js&quot;</span>,{" "}
-                  <span className="text-emerald-300">&quot;Python&quot;</span>],
-                  <br />
-                  &nbsp;&nbsp;focus:{" "}
-                  <span className="text-cyan-300">
-                    &quot;AI &amp; Data-Driven Systems&quot;
-                  </span>
-                  <br />
-                  &#125;;
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
