@@ -18,6 +18,8 @@ import {
   Route,
   Users,
   MonitorPlay,
+  Database,
+  Server,
 } from "lucide-react";
 import { projects } from "../data/projects";
 import { getProjectById } from "../utils/helpers";
@@ -88,6 +90,8 @@ export default function ProjectDetails() {
     workflow,
     modules,
     stackDetails,
+    databaseSchema,
+    apiEndpoints,
     screenshots,
   } = project;
 
@@ -271,6 +275,63 @@ export default function ProjectDetails() {
                   <p className="text-sm text-slate-400 leading-relaxed font-body bg-slate-900/40 rounded-xl p-4 border border-sky-400/10">
                     {architecture}
                   </p>
+                </SectionBlock>
+              )}
+
+              {databaseSchema?.length > 0 && (
+                <SectionBlock icon={Database} label="Database Design & Schema">
+                  <div className="space-y-2.5">
+                    {databaseSchema.map((entity) => (
+                      <div
+                        key={entity.table}
+                        className="rounded-xl border border-white/5 bg-slate-950/35 p-3.5"
+                      >
+                        <span className="inline-block rounded-md border border-sky-400/20 bg-sky-400/10 px-2.5 py-0.5 font-mono text-xs font-semibold text-sky-300">
+                          {entity.table}
+                        </span>
+                        <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                          {entity.details}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </SectionBlock>
+              )}
+
+              {apiEndpoints?.length > 0 && (
+                <SectionBlock icon={Server} label="Complete API Endpoint Matrix">
+                  <div className="overflow-x-auto rounded-xl border border-white/5 bg-slate-950/35">
+                    <table className="w-full text-left text-xs text-slate-400">
+                      <thead className="border-b border-white/10 bg-slate-900/60 text-[11px] uppercase tracking-wider text-sky-300">
+                        <tr>
+                          <th className="px-3.5 py-2.5">Endpoint</th>
+                          <th className="px-3.5 py-2.5">Method</th>
+                          <th className="px-3.5 py-2.5">Permission</th>
+                          <th className="px-3.5 py-2.5">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {apiEndpoints.map((ep) => (
+                          <tr key={ep.endpoint} className="hover:bg-white/[0.02]">
+                            <td className="px-3.5 py-2.5 font-mono text-slate-200 whitespace-nowrap">
+                              {ep.endpoint}
+                            </td>
+                            <td className="px-3.5 py-2.5 whitespace-nowrap">
+                              <span className="rounded border border-sky-400/20 bg-sky-400/10 px-2 py-0.5 font-mono text-[11px] text-sky-300">
+                                {ep.method}
+                              </span>
+                            </td>
+                            <td className="px-3.5 py-2.5 whitespace-nowrap text-slate-300">
+                              {ep.permission}
+                            </td>
+                            <td className="px-3.5 py-2.5 leading-relaxed">
+                              {ep.description}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </SectionBlock>
               )}
 
