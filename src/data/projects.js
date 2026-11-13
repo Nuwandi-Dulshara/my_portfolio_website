@@ -29,13 +29,204 @@ export const PROJECT_CATEGORIES = [
     badge: "Interactive & Creative",
     description:
       "Engaging, high-performance web applications built with modern frontend frameworks, rich animations, and responsive design.",
-    projectIds: ["personal-document-tracker", "birthday-wish"],
+    projectIds: ["personal-document-tracker", "profile-studio", "birthday-wish"],
   },
 ];
 
 // Replace each *_VIDEO_FILE_ID with its individual Google Drive video file ID.
 // Use /file/d/FILE_ID/preview URLs, never a folder URL. Set to null to disable a demo.
 export const projects = [
+  {
+    id: "profile-studio",
+    displayName: "Profile Studio Pro",
+    categoryGroup: "web-apps",
+    title: "Profile Studio Pro (dj_profilemaker)",
+    shortDescription:
+      "A full-stack SaaS digital identity, portfolio, and resume builder featuring a real-time split-screen editor, 10 instant visual themes, custom vanity URLs (/p/<slug>), QR business cards, visitor analytics, and one-click A4 PDF resume exports with clickable hyperlinks.",
+    fullDescription:
+      "Profile Studio Pro (dj_profilemaker) is a modern, full-stack digital profile and resume builder designed to help professionals, software engineers, designers, and executives craft and share their personal brand online. Instead of forcing users to choose between static PDF resume generators and complicated website builders, Profile Studio Pro provides a real-time split-screen builder, 10 instant visual themes, custom vanity URLs (/p/<slug>), QR code business cards, visitor analytics, and one-click A4 PDF resume exports with clickable hyperlinks.",
+    categories: ["Full Stack", "Web Apps"],
+    technologies: [
+      "React 19",
+      "TypeScript 6",
+      "Vite 8",
+      "Python",
+      "Django 5.2",
+      "Django REST Framework",
+      "MySQL",
+      "React Router v7",
+      "@dnd-kit",
+      "html2canvas",
+      "jsPDF",
+      "ReportLab",
+      "drf-spectacular",
+    ],
+    image: "/images/projects/profile-studio.png",
+    demoVideoUrl: "https://drive.google.com/file/d/1KtE9NXeDTwXtT-rCZdphUs9q59DN0zlL/preview",
+    github: "https://github.com/Nuwandi-Dulshara/dj_profilemaker/",
+    liveDemo: null,
+    featured: true,
+    caseStudy: "/projects/profile-studio",
+    userRoles: ["Authenticated Profile Owner", "Public Portfolio Visitor"],
+    workflow: [
+      "Authenticate via DRF Token Auth stored in localStorage (profile_studio_token) and validated on startup via /api/auth/me/ with automatic 401 interception",
+      "Create, search (?search=), manage, and publish multiple distinct role-specific profiles from a centralized Dashboard",
+      "Enter biography, skills, work history, education, projects, and social links once into the single-source-of-truth reactive state in Builder.tsx",
+      "Crop a 1:1 avatar in ImageCropperModal.tsx (validated for JPEG/PNG/WebP < 2 MB and decoded on the backend via Base64ImageField) and reorder skills or experiences via @dnd-kit",
+      "Switch instantaneously across 10 curated visual templates (Professional, Creative, Minimal, Modern, Executive, Developer, Elegant, Magazine, Bold, Startup) in the live preview without losing data",
+      "Publish to a collision-free vanity URL (/p/<slug>), generate a downloadable PNG QR business card, and track real-time visitor telemetry (IP, User-Agent, views_count) and contact messages",
+      "Export a high-DPI A4 PDF resume on the client with smart single-page scaling (within 15% of A4 height), multi-page slicing, and coordinate-mapped clickable hyperlinks (jsPDF.link()), or download a server-generated vector PDF via ReportLab",
+    ],
+    modules: [
+      {
+        title: "Split-Screen Live Builder & 10-Theme Engine",
+        description:
+          "Built across Builder.tsx, ProfileForm.tsx, and ProfilePreview.tsx. Maintains a single reactive Profile state where every keystroke, slider adjustment, or drag-and-drop reorder immediately re-renders across 10 themes: professional, creative, minimal, modern, executive, developer, elegant, magazine, bold, and startup.",
+      },
+      {
+        title: "Single-Payload Nested Serialization & Base64ImageField",
+        description:
+          "Solves multipart/form-data limitations for deeply nested arrays by encoding cropped 1:1 avatars as Base64 data URLs on the frontend and decoding them into UUID ContentFiles (/media/profiles/) via a custom DRF Base64ImageField, while preserving existing /media/ or http URLs on edits and mapping camelCase to snake_case.",
+      },
+      {
+        title: "Collision-Free Vanity Slug Generation",
+        description:
+          "Implemented in Profile.generate_unique_slug and ProfileSerializer.validate_slug. Regex-sanitizes custom vanity slugs (/p/alex-morgan) or auto-slugifies the profile name, checking MySQL for collisions and appending -2, -3 automatically while excluding the current instance on updates.",
+      },
+      {
+        title: "Dual-Mode PDF Resume Export Engine",
+        description:
+          "Client-side pdfExport.ts renders at scale: 2 (1024px width) via html2canvas, applies smart single-page scaling (scaledHeight <= printableHeight * 1.15) or multi-page slicing (> 25mm overflow), and maps DOM getBoundingClientRect() coordinates into A4 millimeter space to overlay clickable jsPDF.link() annotations. Server-side /api/profiles/<id>/pdf/ generates vector PDFs via ReportLab.",
+      },
+      {
+        title: "Authentication & Global Theme System",
+        description:
+          "Token-based authentication (accounts/views.py, AuthContext.tsx) with startup session verification and 401 interception in client.ts, paired with ThemeContext.tsx persisting Dark/Light preferences in localStorage across Home, Dashboard, Builder, Settings, and Public Profile views.",
+      },
+      {
+        title: "Engagement Suite, QR Cards & Visitor Telemetry",
+        description:
+          "Every published /p/<slug> profile includes downloadable client/server PNG QR codes, an embedded visitor ContactModal, and PublicProfileView telemetry that increments views_count, logs IP and User-Agent into ProfileView, and aggregates Dashboard statistics.",
+      },
+    ],
+    stackDetails: [
+      {
+        name: "Frontend UI (React 19 + TypeScript 6 + Vite 8)",
+        purpose: "Component architecture, strict typing (templates.ts), and fast HMR",
+      },
+      {
+        name: "Routing (React Router v7)",
+        purpose: "Public routes (/, /p/:slug, /login) and guarded routes (ProtectedRoute.tsx)",
+      },
+      {
+        name: "Drag & Drop (@dnd-kit/core, @dnd-kit/sortable)",
+        purpose: "Accessible pointer and keyboard reordering of Skills and Work Experiences",
+      },
+      {
+        name: "Image Processing (react-easy-crop + Base64)",
+        purpose: "Interactive 1:1 avatar cropping on client, decoded via Base64ImageField on backend",
+      },
+      {
+        name: "PDF & QR Generation (html2canvas, jspdf, qrcode.react / reportlab, qrcode)",
+        purpose: "Dual-mode client and server PDF resume generation and QR code PNG downloads",
+      },
+      {
+        name: "Backend API (Django 5.2 + Django REST Framework)",
+        purpose: "RESTful viewsets, token authentication, and nested object persistence",
+      },
+      {
+        name: "Database (MySQL — profile_studio_db)",
+        purpose: "utf8mb4 relational persistence with UUID primary keys and cascading foreign keys",
+      },
+      {
+        name: "API Documentation (drf-spectacular)",
+        purpose: "Auto-generated OpenAPI 3.0 schema, Swagger UI (/api/docs/), and ReDoc (/api/redoc/)",
+      },
+    ],
+    databaseSchema: [
+      {
+        table: "Profile",
+        details:
+          "PK: id (UUIDField) | FK: user (auth.User, CASCADE) | Core Fields: name, title, bio, email, phone, location, photo (ImageField), template_id (10 choices) | Routing & Telemetry: slug (Unique indexed SlugField), views_count (PositiveIntegerField), is_published, created_at, updated_at",
+      },
+      {
+        table: "Skill",
+        details: "PK: id (UUID) | FK: profile_id | Fields: name, level (0–100%), order",
+      },
+      {
+        table: "SocialLink",
+        details: "PK: id (UUID) | FK: profile_id | Fields: platform, url, order",
+      },
+      {
+        table: "Experience",
+        details: "PK: id (UUID) | FK: profile_id | Fields: role, company, start_date, end_date, current, description, order",
+      },
+      {
+        table: "Education",
+        details: "PK: id (UUID) | FK: profile_id | Fields: institution, degree, field_of_study, start_date, end_date, order",
+      },
+      {
+        table: "Project",
+        details: "PK: id (UUID) | FK: profile_id | Fields: title, description, image, demo_url, github_url, tags, order",
+      },
+      {
+        table: "ProfileView",
+        details: "PK: id (BigAutoField) | FK: profile_id | Fields: ip_address, user_agent, timestamp",
+      },
+      {
+        table: "ContactMessage",
+        details: "PK: id (UUID) | FK: profile_id | Fields: sender_name, sender_email, subject, message, created_at",
+      },
+    ],
+    apiEndpoints: [
+      { endpoint: "/api/", method: "GET", permission: "AllowAny", description: "Health check and API endpoint directory" },
+      { endpoint: "/api/auth/register/", method: "POST", permission: "AllowAny", description: "Register user (name, email, password) & return token" },
+      { endpoint: "/api/auth/login/", method: "POST", permission: "AllowAny", description: "Authenticate user by email & password & return token" },
+      { endpoint: "/api/auth/logout/", method: "POST", permission: "IsAuthenticated", description: "Invalidate current user's DRF token" },
+      { endpoint: "/api/auth/me/", method: "GET", permission: "IsAuthenticated", description: "Fetch current logged-in user details" },
+      { endpoint: "/api/auth/settings/", method: "PUT", permission: "IsAuthenticated", description: "Update user's name, email, or password" },
+      { endpoint: "/api/auth/forgot-password/", method: "POST", permission: "AllowAny", description: "Send password reset email (enumeration-safe)" },
+      { endpoint: "/api/auth/reset-password/", method: "POST", permission: "AllowAny", description: "Update user password" },
+      { endpoint: "/api/auth/resend-verification/", method: "POST", permission: "IsAuthenticated", description: "Resend account verification email" },
+      { endpoint: "/api/profiles/", method: "GET, POST", permission: "IsAuthenticated", description: "List user's profiles (supports ?search=) or create one" },
+      { endpoint: "/api/profiles/<uuid>/", method: "GET, PUT, DELETE", permission: "IsAuthenticated", description: "Retrieve, update (with nested lists), or delete a profile" },
+      { endpoint: "/api/profiles/<uuid>/qr/", method: "GET", permission: "AllowAny", description: "Generate and return a PNG QR code for /p/<slug>" },
+      { endpoint: "/api/profiles/<uuid>/pdf/", method: "GET", permission: "AllowAny", description: "Generate and download server-side PDF resume" },
+      { endpoint: "/api/profiles/dashboard/stats/", method: "GET", permission: "IsAuthenticated", description: "Aggregate profile, skill, project, view, and template counts" },
+      { endpoint: "/api/public/p/<slug>/", method: "GET", permission: "AllowAny", description: "Fetch public profile by slug & record view analytics" },
+      { endpoint: "/api/public/p/<slug>/contact/", method: "POST", permission: "AllowAny", description: "Submit a contact message to the profile owner" },
+      { endpoint: "/api/docs/ & /api/redoc/", method: "GET", permission: "AllowAny", description: "Interactive Swagger UI and ReDoc OpenAPI documentation" },
+    ],
+    screenshots: [],
+    problem:
+      "1) Static vs. Interactive Trade-off: Traditional resume tools output flat PDFs that cannot be shared as live web portfolios, while website builders require hours of manual layout tuning. 2) Broken Hyperlinks in Canvas PDF Exports: Most client-side HTML-to-PDF tools rasterize the DOM into a flat image, destroying clickable links to GitHub, LinkedIn, email, and live project demos. 3) Rigid Templates: Users often have to re-enter their data when switching designs or managing multiple role-specific profiles (e.g., one profile for Frontend Engineering and another for Technical Consulting). 4) Lack of Networking & Analytics Tools: Standard portfolios rarely include built-in QR code generation for in-person events or view-tracking telemetry.",
+    solution:
+      "Profile Studio Pro solves these challenges with: 1) A Single-Source-of-Truth Data Model where users enter their biography, skills, work history, education, projects, and social links once, and toggle across 10 curated templates instantaneously without losing data. 2) A Multi-Profile Workspace allowing a single account to create, search, manage, and publish multiple distinct profiles from a centralized Dashboard. 3) A Coordinate-Mapped Interactive PDF Engine (pdfExport.ts) combining high-DPI html2canvas rendering with DOM bounding-box calculation to overlay active, clickable hyperlink annotations (jsPDF.link()) onto single-page or multi-page A4 PDFs. 4) A Built-in Engagement Suite where every published profile receives a unique slug (/p/<slug>), downloadable PNG QR code, real-time view counter, and embedded visitor contact modal.",
+    architecture:
+      "Decoupled Client–Server REST Architecture: React 19 + TypeScript 6 + Vite 8 Frontend (Auth & Theme Context, Split-Screen Builder, 10-Theme Live Preview, Client PDF & QR Engine) → REST API Client (fetch + DRF Token) → Django 5.2 + DRF REST API Backend (accounts App: Token Auth, Reset, User Settings; profiles App: Nested Serializers, ReportLab, QR, View Telemetry, Contact; OpenAPI 3.0 Docs: Swagger UI & ReDoc) → MySQL Database (profile_studio_db, utf8mb4, UUID primary keys, 8 relational tables) + Local Media Storage.",
+    features: [
+      "Real-time split-screen builder with instant reactive preview",
+      "10 curated visual themes (professional, creative, minimal, modern, executive, developer, elegant, magazine, bold, startup)",
+      "Multi-profile workspace with server-side search (?search=) and telemetry",
+      "Accessible pointer and keyboard drag-and-drop sorting (@dnd-kit)",
+      "1:1 client-side avatar cropping (react-easy-crop) with backend Base64ImageField decoding",
+      "Single-payload nested JSON serialization with camelCase-to-snake_case DRF source mapping",
+      "Collision-free custom or auto-generated vanity URLs (/p/<slug>)",
+      "Coordinate-mapped client A4 PDF export with smart 15% single-page scaling, multi-page slicing, and clickable hyperlinks",
+      "Server-side ReportLab vector PDF resume export (/api/profiles/<id>/pdf/)",
+      "Client and server PNG QR code business card generation (/api/profiles/<id>/qr/)",
+      "Visitor analytics tracking views_count, IP address, and User-Agent",
+      "Embedded public visitor contact modal and message persistence",
+      "Persistent Dark / Light theme switching and OpenAPI 3.0 Swagger UI & ReDoc documentation",
+    ],
+    challenges:
+      "1) Single-Payload Nested Serialization & Image Uploads: Uploading an image file normally requires multipart/form-data, making deeply nested arrays (skills, experiences, education, projects, links) cumbersome. Solved via client-side validation (< 2 MB JPEG/PNG/WebP), 1:1 cropping into Base64, and a custom backend Base64ImageField that decodes new payloads into UUID ContentFiles while preserving existing /media/ or http URLs during edits. 2) Preserving Clickable Links & Pagination in Canvas PDFs: Solved by rendering at scale: 2 (1024px window width), applying smart single-page scaling when within 15% of A4 height or slicing across pages when overflow exceeds 25mm, and mapping each anchor's DOM getBoundingClientRect() into A4 millimeter coordinates via jsPDF.link(). 3) Collision-Free Vanity Slugs: Implemented automatic MySQL collision detection that appends -2, -3 suffixes for duplicate slugs and excludes the current profile instance during updates.",
+    results:
+      "Profile Studio Pro delivers a unified, full-stack SaaS digital identity platform that bridges static resume generators and live portfolio websites. It combines a 10-theme reactive builder, dual-mode interactive PDF generation, QR code networking, and visitor telemetry backed by an 8-table MySQL schema and 17 documented REST API endpoints.",
+    limitations:
+      "Technical Audit & Future Roadmap: 1) Connect Frontend Modals & Settings to Existing Backend Endpoints: Wire Settings.tsx and ContactModal.tsx (currently using client-side setTimeout simulations) to the already-implemented PUT /api/auth/settings/, POST /api/auth/resend-verification/, and POST /api/public/p/<slug>/contact/ (profilesApi.submitContactMessage) endpoints. 2) Tokenized Password Reset: Upgrade ForgotPasswordView and ResetPasswordView to generate and verify cryptographic tokens using django.contrib.auth.tokens.default_token_generator and uidb64. 3) Database Concurrency & Transactional Integrity: Wrap ProfileSerializer.create and ProfileSerializer.update in django.db.transaction.atomic() so nested updates are all-or-nothing, and replace views_count=profile.views_count + 1 in PublicProfileView with F('views_count') + 1 to prevent race conditions. 4) Production Security Configuration: Move SECRET_KEY, DEBUG, and ALLOWED_HOSTS in settings.py to .env variables alongside the MySQL configuration.",
+    role: "Full-Stack Developer — React 19 & TypeScript frontend architecture, 10-theme live builder, coordinate-mapped interactive PDF engine, Django 5.2 REST API, nested serialization, and MySQL database design.",
+  },
   {
     id: "pos-system",
     displayName: "POS System",

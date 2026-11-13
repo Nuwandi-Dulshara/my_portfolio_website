@@ -3,16 +3,11 @@ import { Link } from "react-router-dom";
 import { Play, FileText, Lock } from "lucide-react";
 import TechBadge from "../ui/TechBadge";
 import VideoModal from "./VideoModal";
-
-const SHARED_CARD_BACK = "/images/projects/project-card-back.png";
+import ProjectImage from "./ProjectImage";
 
 export default function ProjectCard({ project }) {
   const [videoOpen, setVideoOpen] = useState(false);
-  const [imageError, setImageError] = useState(false);
-
-  const displayImage = !imageError && (project.image || project.thumbnail)
-    ? (project.image || project.thumbnail)
-    : SHARED_CARD_BACK;
+  const displayImage = project.image || project.thumbnail;
 
   const projectTitle = project.displayName || project.title;
 
@@ -21,12 +16,10 @@ export default function ProjectCard({ project }) {
       <article className="group relative flex flex-col h-full rounded-2xl border border-sky-400/20 bg-slate-900/60 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-sky-400/45 hover:shadow-[0_14px_45px_rgba(14,165,233,0.18)] hover:-translate-y-1.5">
         {/* Project Image */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950/80 border-b border-sky-400/10">
-          <img
+          <ProjectImage
             src={displayImage}
-            alt={`${projectTitle} preview`}
-            onError={() => setImageError(true)}
+            title={projectTitle}
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-            loading="lazy"
           />
 
           {/* Featured / Private Badges overlay */}
