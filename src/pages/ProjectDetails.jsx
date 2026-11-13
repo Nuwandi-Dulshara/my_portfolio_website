@@ -24,6 +24,7 @@ import { getProjectById } from "../utils/helpers";
 import GlassCard from "../components/ui/GlassCard";
 import TechBadge from "../components/ui/TechBadge";
 import VideoModal from "../components/projects/VideoModal";
+import ProjectImage from "../components/projects/ProjectImage";
 
 const SectionBlock = ({ icon: Icon, label, children }) => (
   <GlassCard className="mb-5">
@@ -182,11 +183,15 @@ export default function ProjectDetails() {
             </div>
           </div>
 
-          {image && (
-            <div className="mb-8 overflow-hidden rounded-3xl border border-sky-400/15 bg-slate-950/60 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
-              <img src={image} alt={`${title} application screenshot`} className="aspect-video w-full object-cover" />
-            </div>
-          )}
+          <div className="mb-8 overflow-hidden rounded-3xl border border-sky-400/15 bg-slate-950/60 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
+            <ProjectImage
+              key={image || project.id}
+              src={image}
+              title={title}
+              alt={`${title} application screenshot`}
+              className="aspect-video w-full object-cover"
+            />
+          </div>
 
           {/* Private repo notice */}
           {privateRepository && (

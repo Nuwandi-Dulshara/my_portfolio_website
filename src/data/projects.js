@@ -29,13 +29,85 @@ export const PROJECT_CATEGORIES = [
     badge: "Interactive & Creative",
     description:
       "Engaging, high-performance web applications built with modern frontend frameworks, rich animations, and responsive design.",
-    projectIds: ["personal-document-tracker", "birthday-wish"],
+    projectIds: ["personal-document-tracker", "profile-studio", "birthday-wish"],
   },
 ];
 
 // Replace each *_VIDEO_FILE_ID with its individual Google Drive video file ID.
 // Use /file/d/FILE_ID/preview URLs, never a folder URL. Set to null to disable a demo.
 export const projects = [
+  {
+    id: "profile-studio",
+    displayName: "Profile Studio Pro",
+    categoryGroup: "web-apps",
+    title: "Profile Studio Pro",
+    shortDescription:
+      "A full-stack portfolio and resume builder with live preview, 10 templates, public profile URLs, QR sharing, and downloadable PDFs with clickable links.",
+    fullDescription:
+      "Profile Studio Pro (dj_profilemaker) is a digital identity platform for professionals, developers, creatives, and executives. It brings structured profile editing, a split-screen live preview, online publishing, and PDF resumes into one workspace, bridging the gap between static resume generators and manual website builders.",
+    categories: ["Full Stack", "Web Apps"],
+    technologies: ["React 19", "TypeScript", "Django REST Framework", "MySQL", "Vite", "Django", "jsPDF"],
+    image: "/images/projects/profile-studio.png",
+    demoVideoUrl: "https://drive.google.com/file/d/1KtE9NXeDTwXtT-rCZdphUs9q59DN0zlL/preview",
+    github: "https://github.com/Nuwandi-Dulshara/dj_profilemaker/",
+    liveDemo: null,
+    featured: false,
+    caseStudy: "/projects/profile-studio",
+    userRoles: ["Profile Owner", "Public Visitor"],
+    workflow: [
+      "Register or sign in with an email address and password",
+      "Add personal information, skills, experience, education, projects, and social links",
+      "Crop an avatar and reorder skills and work experience",
+      "Preview changes live and switch between 10 templates without losing profile data",
+      "Save the profile and share its public vanity URL or downloadable QR code",
+      "Export a styled PDF with clickable links or a server-generated resume",
+      "Review profile views and receive messages from public visitors",
+    ],
+    modules: [
+      { title: "Account & Authentication", description: "Email-first registration, DRF token authentication, protected routes, and stored-token verification on application startup." },
+      { title: "Live Profile Builder", description: "Six structured editing sections, split-screen reactive preview, avatar cropping, and pointer- and keyboard-accessible sorting for skills and experience." },
+      { title: "10-Template Engine", description: "Professional, Creative, Minimal, Modern, Executive, Developer, Elegant, Magazine, Bold Cyber, and Startup themes share the same profile data." },
+      { title: "Publishing & Engagement", description: "Public /p/<slug> profiles, downloadable QR codes, profile-view tracking, dashboard statistics, and a visitor contact endpoint." },
+      { title: "Dual PDF Export", description: "Client-side html2canvas and jsPDF preserve template styling and clickable hyperlinks; a ReportLab endpoint generates a lightweight resume directly from saved data." },
+      { title: "Nested Profile Storage", description: "A single JSON payload saves profile details and related records. Hybrid image handling accepts cropped Base64 data, preserves existing media URLs, and supports file uploads." },
+    ],
+    stackDetails: [
+      { name: "React 19, TypeScript & Vite", purpose: "Typed single-page application, live editing, preview rendering, and frontend tooling" },
+      { name: "React Router", purpose: "Public profile routes and protected application screens" },
+      { name: "Django 5.2 & Django REST Framework", purpose: "REST endpoints, authentication, validation, and nested profile serialization" },
+      { name: "MySQL", purpose: "Relational profile data with UUID identifiers and unique indexed public slugs" },
+      { name: "@dnd-kit & react-easy-crop", purpose: "Sortable skills and experience, plus square avatar cropping" },
+      { name: "html2canvas & jsPDF", purpose: "High-resolution A4 exports with pagination and mapped hyperlink annotations" },
+      { name: "ReportLab, qrcode & Pillow", purpose: "Server-side resume PDFs, QR images, and media processing" },
+      { name: "qrcode.react & drf-spectacular", purpose: "Client-side QR rendering and OpenAPI documentation with Swagger UI and ReDoc" },
+    ],
+    screenshots: [],
+    problem:
+      "Professionals often maintain disconnected resumes, portfolios, and social profiles. Static PDF builders limit online sharing, while website builders require manual design work. Canvas-based PDF exports can also lose clickable links, and printed business cards need a simple path back to a live profile.",
+    solution:
+      "Profile Studio Pro combines structured profile data with instant template switching and live preview. One profile can be published at a vanity URL, shared through a QR code, and exported as a resume. A custom coordinate-mapping step restores clickable hyperlinks to canvas-rendered PDFs, while view tracking and visitor messages support engagement.",
+    architecture:
+      "React and TypeScript SPA communicates with a Django REST Framework API backed by MySQL. Token-authenticated endpoints manage accounts and profiles; public slug routes serve published profiles. Nested serializers handle related skills, social links, experience, education, and projects in a single request. Browser-based PDF rendering and server-side ReportLab generation provide two export paths.",
+    features: [
+      "Email-first registration, token authentication, and session recovery",
+      "Split-screen profile builder with six structured sections",
+      "10 instant templates with shared profile data",
+      "Drag-and-drop ordering for skills and work experience",
+      "Avatar cropping and hybrid Base64/media URL handling",
+      "Public vanity URLs and client- and server-generated QR codes",
+      "Styled A4 PDF export with pagination and clickable hyperlinks",
+      "Server-generated PDF resumes using ReportLab",
+      "Profile views, dashboard statistics, and a visitor contact endpoint",
+      "OpenAPI schema, Swagger UI, and ReDoc documentation",
+    ],
+    challenges:
+      "Key engineering challenges included preserving hyperlinks in rasterized PDF exports, fitting and paginating variable-length profiles, keeping preview and template changes synchronized, persisting nested record ordering, and accepting new cropped avatars without replacing unchanged images on updates.",
+    results:
+      "The prototype brings profile editing, template customization, public sharing, QR generation, and two PDF export strategies into a single application. It demonstrates decoupled full-stack architecture and document-generation workflows; no adoption or performance metrics were supplied.",
+    limitations:
+      "Future work identified in the supplied audit includes connecting simulated frontend settings and contact interactions to backend endpoints, validating signed one-time password-reset tokens, wrapping nested writes in database transactions, using atomic view-count increments, and moving deployment settings into environment variables. These improvements remain necessary before production deployment.",
+    role: "Full-Stack Development — React and TypeScript interface, Django REST API, MySQL data model, profile publishing, and PDF export workflows.",
+  },
   {
     id: "pos-system",
     displayName: "POS System",
